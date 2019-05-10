@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AnimalsController">
+<children>
+<TableView fx:id="animalsTable" layoutX="66.0" layoutY="81.0" onMouseClicked="#showFromTable" prefHeight="392.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
+   <columns>
+      <TableColumn fx:id="nameColumn" prefWidth="84.800048828125" resizable="false" text="MENO" />
+      <TableColumn fx:id="dateColumn" prefWidth="177.0" resizable="false" text="DATUM NARODENIA" />
+      <TableColumn fx:id="stavColumn" minWidth="0.0" prefWidth="97.0" resizable="false" text="STAV" />
+      <TableColumn fx:id="triedaColumn" prefWidth="113.0" resizable="false" text="TRIEDA" />
+      <TableColumn fx:id="celadColumn" minWidth="0.0" prefWidth="101.0" resizable="false" text="ČEĽAĎ" />
+            <TableColumn fx:id="radColumn" minWidth="0.0" prefWidth="107.0" resizable="false" text="RAD" />
+   </columns>
+</TableView>
+<ImageView fx:id="addBtn" fitHeight="55.0" fitWidth="55.0" layoutX="693.0" layoutY="8.0" onMouseClicked="#showAddAnimal" pickOnBounds="true" preserveRatio="true" styleClass=".g">
+   <image>
+      <Image url="@../image/plus.png" />
+   </image>
+</ImageView>
+<ImageView fx:id="deleteBtn" fitHeight="48.0" fitWidth="54.0" layoutX="625.0" layoutY="12.0" onMouseClicked="#deleteAnimal" pickOnBounds="true" preserveRatio="true" styleClass=".g">
+   <image>
+      <Image url="@../image/minus.png" />
+   </image>
+</ImageView>
+      <ImageView fx:id="zdravKartaBtn" fitHeight="48.0" fitWidth="54.0" layoutX="66.0" layoutY="14.0" onMouseClicked="#showAnimalInfo" pickOnBounds="true" preserveRatio="true" styleClass=".g">
+         <image>
+            <Image url="@../image/zdravotnaKartaIMG.png" />
+         </image>
+      </ImageView>
+<Label fx:id="errMessage" alignment="CENTER" layoutX="61.0" layoutY="540.0" prefHeight="17.0" prefWidth="691.0" textFill="RED" />
+</children>
+        </fx:root>
