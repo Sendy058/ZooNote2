@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="back" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.loginController">
+   <center>
+        <AnchorPane maxHeight="628.0" maxWidth="929.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="798.0" styleClass="back-login" stylesheets="@../style.css" BorderPane.alignment="CENTER">
+            <children>
+                <TextField id="pane" fx:id="meno" layoutX="273.0" layoutY="148.0" onAction="#prihlasSa" prefHeight="45.0" prefWidth="250.0" styleClass="text">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></TextField>
+            <PasswordField fx:id="heslo" layoutX="274.0" layoutY="229.0" onAction="#prihlasSa" prefHeight="45.0" prefWidth="250.0" styleClass="text">
+               <font>
+                  <Font size="20.0" />
+               </font></PasswordField>
+            <Label layoutX="275.0" layoutY="119.0" text="MENO">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="274.0" layoutY="202.0" text="HESLO">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="prihlas" fitHeight="46.0" fitWidth="56.0" layoutX="371.0" layoutY="318.0" onMouseClicked="#prihlasSa" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
+               <image>
+                  <Image url="@../image/dalej.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="zabudolHeslo" layoutX="345.0" layoutY="283.0" onMouseClicked="#ZabudolPass" styleClass="textzabudol" text="Zabudol som heslo">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="zle" alignment="TOP_CENTER" layoutX="234.0" layoutY="377.0" onKeyPressed="#prihlasSa" prefHeight="20.0" prefWidth="328.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+   </center>
+</BorderPane>
