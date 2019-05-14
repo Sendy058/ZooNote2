@@ -74,6 +74,7 @@ public class RepairsController implements Initializable {
 
         approveBtn.setVisible(false);
         dismissBtn.setVisible(false);
+        showInfoBtn.setVisible(false);
 
         dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> setRepairStav("2"));
         approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> setRepairStav("1"));
@@ -106,14 +107,14 @@ public class RepairsController implements Initializable {
         String stavString = "";
         for (int i = 0; i < Integer.parseInt(arrLen.getString(1)); i++) {
 
-            switch (dataRepairs.getString(4)) {
-                case "0":
+            switch (dataRepairs.getInt(4)) {
+                case 0:
                     stavString = "Prebiehajúce";
                     break;
-                case "1":
+                case 1:
                     stavString = "Potvrdené";
                     break;
-                case "2":
+                case 2:
                     stavString = "Zamietnuté";
                     break;
             }
@@ -191,30 +192,32 @@ public class RepairsController implements Initializable {
     }
 
     private void setRepairStav(String stav) {
-        Connection connection = ConnectionClass.getConnection();
-        String updateSql = "UPDATE opravy SET stav = ? WHERE nazov_opravy LIKE ?";
-        try {
-            PreparedStatement preparedStatementForUpdate = connection.prepareStatement(updateSql);
-            preparedStatementForUpdate.setString(1, stav);
-            preparedStatementForUpdate.setString(2, selectedName);
-            preparedStatementForUpdate.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        switch (stav) {
-            case "1":
-                stav = "Potvrdené";
-                break;
-            case "2":
-                stav = "Zamietnuté";
-                break;
-        }
-        repairsTable.getSelectionModel().getSelectedItem().setStav(stav);
-        repairsTable.refresh();
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        if (!stav.equals(null)) {
+            Connection connection = ConnectionClass.getConnection();
+            String updateSql = "UPDATE opravy SET stav = ? WHERE nazov_opravy LIKE ?";
+            try {
+                PreparedStatement preparedStatementForUpdate = connection.prepareStatement(updateSql);
+                preparedStatementForUpdate.setString(1, stav);
+                preparedStatementForUpdate.setString(2, selectedName);
+                preparedStatementForUpdate.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            switch (stav) {
+                case "1":
+                    stav = "Potvrdené";
+                    break;
+                case "2":
+                    stav = "Zamietnuté";
+                    break;
+            }
+            repairsTable.getSelectionModel().getSelectedItem().setStav(stav);
+            repairsTable.refresh();
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else System.out.println("you fucked up");
     }
 }
