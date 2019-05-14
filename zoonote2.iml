@@ -7,12 +7,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Email2" level="project" />
-    <orderEntry type="library" name="java-json2" level="project" />
-    <orderEntry type="library" name="java-json1" level="project" />
     <orderEntry type="library" name="Email1" level="project" />
+    <orderEntry type="library" name="java-json1" level="project" />
     <orderEntry type="library" name="Email" level="project" />
+    <orderEntry type="library" name="java-json2" level="project" />
     <orderEntry type="library" name="java-json" level="project" />
+    <orderEntry type="library" name="Email2" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -61,7 +61,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/Email/smtp.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/Email/pop3.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -70,7 +70,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/Email/pop3.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/Email/smtp.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
