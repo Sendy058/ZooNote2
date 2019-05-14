@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static sample.loginController.nameSurname;
+import static controllers.loginController.nameSurname;
 
 public class RequestUsersData {
 
@@ -18,7 +18,6 @@ public class RequestUsersData {
 
     public User getUsersData(String login,String pass) {
         Connection connection = ConnectionClass.getConnection();
-        System.out.println("CONNECTION INICIATED");
         String sql = "SELECT * FROM pouzivatel WHERE username = ? AND password = ?";
 
         try{
@@ -46,7 +45,6 @@ public class RequestUsersData {
             if (connection != null) {
                 try {
                     connection.close();
-                    System.out.println("CONNECTION CLOSED");
                 } catch (SQLException ex) {
                     Logger.getLogger(RequestUsersData.class.getName()).log(Level.SEVERE, null, ex);
                 }

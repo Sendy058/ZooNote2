@@ -30,7 +30,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
+ 
         connection = ConnectionClass.getConnection();
         if(connection == null) {
             System.exit(1);

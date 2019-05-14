@@ -49,10 +49,8 @@ public class  SendMail  {
             transport.connect(host, user, pass);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
-            System.out.println("message send successfully");
             return true;
         } catch (Exception ex) {
-            System.out.println("Chyba nepodarilo sa odoslat emial");
             return  false;
 
         }

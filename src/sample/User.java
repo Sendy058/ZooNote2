@@ -18,9 +18,7 @@ public class User {
         this.email = new SimpleStringProperty(email);
         this.type = new SimpleStringProperty(type);
     }
-    public User(){
-
-    }
+    public User(){}
 
     public String getUsername() {
         return username.get();
@@ -29,11 +27,6 @@ public class User {
     public void setUsername(String username) {
         this.username = new SimpleStringProperty(username);
     }
-
-    public String getPassword() {
-        return password.get();
-    }
-
 
     public void setPassword(String password) {
         this.password= new SimpleStringProperty(password);

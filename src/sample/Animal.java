@@ -34,49 +34,25 @@ public class Animal {
 
     public String getDatum_narodenia() { return datum_narodenia.get(); }
 
-    public void setDatum_narodenia(String datum_narodenia) { this.datum_narodenia = new SimpleStringProperty(datum_narodenia); }
-
     public String getStav() {
         return stav.get();
-    }
-
-    public void setStav(String stav) {
-        this.stav = new SimpleStringProperty(stav);
     }
 
     public String getZdravotna_karta() {
         return zdravotna_karta.get();
     }
 
-    public void setZdravotna_karta(String zdravotna_karta) {
-        this.zdravotna_karta = new SimpleStringProperty(zdravotna_karta);
-    }
-
     public String getTrieda() {
         return trieda.get();
-    }
-
-    public void setTrieda(String trieda) {
-        this.trieda = new SimpleStringProperty(trieda);
     }
 
     public String getRad() {
         return rad.get();
     }
 
-    public void setRad(String rad) {
-        this.rad = new SimpleStringProperty(rad);
-    }
-
     public String getCelad() {
         return celad.get();
     }
 
-    public void setCelad(String celad) {
-        this.celad = new SimpleStringProperty(celad);
-    }
-
     public String getDruh(){return druh.get();}
-
-    public void setDruh(String druh){ this.druh = new SimpleStringProperty(druh);}
 }
