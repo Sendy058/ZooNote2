@@ -5,25 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.scene.chart.*;
-import javafx.scene.Group;
-import javafx.application.Application;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class FinancesController  implements Initializable {
@@ -36,13 +26,10 @@ public class FinancesController  implements Initializable {
     private double zvieraKomplet;
     private double zamesKomplet;
 
-    ObservableList vyber= FXCollections.observableArrayList();
     @FXML
     private Button total;
     @FXML
     private Label suma;
-    @FXML
-    private ChoiceBox<String> obdobie;
 
 
     private ObservableList<PieChart.Data> pieChartDataOpravy = FXCollections.observableArrayList();
@@ -119,23 +106,23 @@ public class FinancesController  implements Initializable {
     @FXML
     private void zvierataNacitaj(){
         Pchart.setData(pieChartDataZvierata);
-        Pchart.setTitle("Zvierata");
+        Pchart.setTitle("Zvieratá");
         suma.setText(zvieraKomplet+" €");
     }
 
     @FXML
     private void totalNacitaj() {
         Pchart.setData(pieChartDataTotal);
-        Pchart.setTitle("Total");
+        Pchart.setTitle("Celkovo");
         suma.setText(zvieraKomplet+opravKomplet+zamesKomplet+" €");
     }
 
 
     private void total(){
         pieChartDataTotal.addAll(
-                new PieChart.Data("Opravi", opravKomplet),
+                new PieChart.Data("Opravy", opravKomplet),
                 new PieChart.Data("Zamestnanci", zamesKomplet),
-                new PieChart.Data("Zvierata", zvieraKomplet));
+                new PieChart.Data("Zvieratá", zvieraKomplet));
 
         pieChartDataTotal.forEach(komplet ->
                 komplet.nameProperty().bind(
@@ -194,11 +181,11 @@ public class FinancesController  implements Initializable {
 
     }
 
-    private void userLoad()throws SQLException{
+    private void userLoad(){
         Connection connection = ConnectionClass.getConnection();
         String sqlUser= "SELECT * FROM pouzivatel";
 
-        PreparedStatement preparedQuery, preparedCountStatement;
+        PreparedStatement preparedQuery;
         try {
             preparedQuery = connection.prepareStatement(sqlUser);
             user = preparedQuery.executeQuery();
@@ -331,7 +318,7 @@ public class FinancesController  implements Initializable {
             e.printStackTrace();
         }
 
-        pieChartDataZamestnanci.addAll((new PieChart.Data("Opraváry",op*900)),
+        pieChartDataZamestnanci.addAll((new PieChart.Data("Opravári",op*900)),
                 (new PieChart.Data("Ošetrovatelia",os*1200)));
 
         pieChartDataZamestnanci.forEach(zamestnanci ->
