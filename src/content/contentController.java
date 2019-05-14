@@ -1,5 +1,6 @@
 package content;
 
+import controllers.loginController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -23,9 +23,6 @@ public class contentController extends loginController implements Initializable 
     BorderPane mainPane;
     @FXML
     Label menoPriezvisko;
-
-    @FXML
-    Button hover;
 
     private Home home;
     private Finances finances;
@@ -82,7 +79,7 @@ public class contentController extends loginController implements Initializable 
 
     @FXML
     public void onHomeBtnClick() {
-        Home home = new Home();
+        home = new Home();
         mainPane.setCenter(home);
         for (Button btn:Butons) {
             if (btn==homeBtn) {
@@ -94,13 +91,6 @@ public class contentController extends loginController implements Initializable 
         }
     }
 
-    /*   @FXML
-        public void changeBackground() {
-            if (i==1) {
-                home.setBackground(new Background(whiteBack));
-            }else home.setBackground(new Background(normalBack));
-            i = 1-i;
-            }*/
     @FXML
     public void onFinancesBtnClick() {
         finances = new Finances();

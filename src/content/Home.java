@@ -4,8 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-
-public class Home extends AnchorPane {
+class Home extends AnchorPane {
      Home() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Home.fxml"));
 

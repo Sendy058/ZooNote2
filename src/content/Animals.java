@@ -5,7 +5,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Animals extends AnchorPane {
+class Animals extends AnchorPane {
     Animals() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Animals.fxml"));
 
