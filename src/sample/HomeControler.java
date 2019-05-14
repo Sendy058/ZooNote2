@@ -271,7 +271,7 @@ public class HomeControler implements Initializable {
 
             }
         }
-        System.out.println(menoTomorrow);
+
         try {
             connection.close();
 

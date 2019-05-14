@@ -1,10 +1,13 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -32,63 +35,141 @@ public class contentController extends loginController implements Initializable 
     private Repairs repairs;
     private Users users;
 
-  /*  private BackgroundImage whiteBack = new BackgroundImage(new Image("image/Uvod_white.png",800,562,false,true),
-    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-    BackgroundSize.DEFAULT);
+    @FXML
+    private Button homeBtn;
+    @FXML
+    private Button financeBtn;
+    @FXML
+    private Button zvierataBtn;
+    @FXML
+    private Button spraviBtn;
+    @FXML
+    private Button opraviBtn;
+    @FXML
+    private Button kontaBtn;
+    private ObservableList<Button> Butons = FXCollections.observableArrayList();
 
-    private BackgroundImage normalBack = new BackgroundImage(new Image("image/uvod2.png",800,562,false,true),
-            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-            BackgroundSize.DEFAULT);
 
-    int i = 0;
-*/
+
+
+    /*  private BackgroundImage whiteBack = new BackgroundImage(new Image("image/Uvod_white.png",800,562,false,true),
+      BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+      BackgroundSize.DEFAULT);
+
+      private BackgroundImage normalBack = new BackgroundImage(new Image("image/uvod2.png",800,562,false,true),
+              BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              BackgroundSize.DEFAULT);
+
+      int i = 0;
+  */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         menoPriezvisko.setText(nameSurname);
         home = new Home();
         mainPane.setCenter(home);
+        Butons.addAll(homeBtn,financeBtn,zvierataBtn,spraviBtn,opraviBtn,kontaBtn);
+        for (Button btn:Butons) {
+            if (btn==homeBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;");
+            }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
+
+
     }
 
     @FXML
     public void onHomeBtnClick() {
         Home home = new Home();
         mainPane.setCenter(home);
+        for (Button btn:Butons) {
+            if (btn==homeBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;"); }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
     }
-/*   @FXML
-    public void changeBackground() {
-        if (i==1) {
-            home.setBackground(new Background(whiteBack));
-        }else home.setBackground(new Background(normalBack));
-        i = 1-i;
-        }*/
+
+    /*   @FXML
+        public void changeBackground() {
+            if (i==1) {
+                home.setBackground(new Background(whiteBack));
+            }else home.setBackground(new Background(normalBack));
+            i = 1-i;
+            }*/
     @FXML
-    public void onFinancesBtnClick(){
+    public void onFinancesBtnClick() {
         finances = new Finances();
         mainPane.setCenter(finances);
+        for (Button btn:Butons) {
+            if (btn==financeBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;"); }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
     }
 
     @FXML
-    public void onAnimalsBtnClick(){
+    public void onAnimalsBtnClick() {
         animals = new Animals();
         mainPane.setCenter(animals);
+        for (Button btn:Butons) {
+            if (btn==zvierataBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;"); }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
     }
 
     @FXML
-    public void onInvoicesBtnClick(){
+    public void onInvoicesBtnClick() {
         invoices = new Invoices();
         mainPane.setCenter(invoices);
+        for (Button btn:Butons) {
+            if (btn==spraviBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;"); }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
     }
 
     @FXML
-    public void onRepairsBtnClick(){
+    public void onRepairsBtnClick() {
         repairs = new Repairs();
         mainPane.setCenter(repairs);
+        for (Button btn:Butons) {
+            if (btn==opraviBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;"); }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
     }
 
     @FXML
-    public void onUsersBtnClick(){
+    public void onUsersBtnClick() {
         users = new Users();
         mainPane.setCenter(users);
+        for (Button btn:Butons) {
+            if (btn==kontaBtn) {
+                btn.setStyle("-fx-text-fill:black;" +
+                        "-fx-background-color: #80906c;"); }
+            else{
+                btn.setStyle("-fx-text-fill:white;" +
+                        "-fx-background-color: #80906c;"); }
+        }
     }
 
     @FXML
@@ -99,7 +180,6 @@ public class contentController extends loginController implements Initializable 
         Stage stage = (Stage) menoPriezvisko.getScene().getWindow();
         stage.setScene(scene);
     }
-
 
 
 }
