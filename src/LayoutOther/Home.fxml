@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="562.0" prefWidth="800.0" styleClass="home" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.HomeControler">
+<fx:root prefHeight="562.0" prefWidth="800.0" styleClass="home" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeControler">
     <children>
         <Label layoutX="626.0" layoutY="64.0" prefHeight="17.0" prefWidth="119.0" />
         <Label fx:id="nameDay" layoutX="626.0" layoutY="44.0" prefHeight="27.0" prefWidth="136.0" text="MENO">

@@ -25,8 +25,6 @@ public class Weather {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-            int responseCode = con.getResponseCode();
-            System.out.println("Response Code : " + responseCode);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;

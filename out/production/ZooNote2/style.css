@@ -26,14 +26,65 @@
     -fx-background-size:cover;
 }
 
-.text{
--fx-background-color:transparent;
--fx-border-width: 0 0 3 0;
+
+.textButton{
+-fx-text-fill:white;
+-fx-background-color: #80906c;
+-fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+-fx-border-width: 0 0 1 0;
 -fx-border-color: transparent transparent black transparent;
+
 }
+.klik:focused {
+-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+-fx-padding: 15 0 0 0;
+
+}
+
+.jooj{
+
+-fx-text-fill:black;
+}
+
+.chart-title{
+     -fx-font-size: 1.7em;
+    -fx-font-weight: bold;
+}
+.chart-legend {
+   -fx-font-size: 0.8em;
+     -fx-font-weight: bold;
+     }
+
+.chart-legend-item{
+  -fx-font-size: 1em;
+  -fx-font-weight: bold;
+}
+
+.choice-box .context-menu { -fx-width:300px; }
+
+.choice-box .menu-item:focused { -fx-background-color: #80906c; }
+.choice-box > .label { -fx-font-weight: bold;
+                       -fx-font-size: 1.3em; }
+
+.choice-box .menu-item {
+    -fx-font-size: 1.3em;
+    -fx-font-weight: bold;
+
+
+ }
+
+.text{
+ -fx-background-color:transparent;
+ -fx-border-width: 0 0 3 0;
+ -fx-border-color: transparent transparent black transparent;
+ }
+
+
 .line:hover{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
+
 /*
 .text:focused{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);

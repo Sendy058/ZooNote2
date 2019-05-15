@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddRepairController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddRepairController">
     <children>
         <Line endX="174.0" layoutX="201.0" layoutY="78.0" startX="-175.0" />
         <Label layoutX="33.0" layoutY="125.0" prefHeight="20.0" prefWidth="59.0" text="CENA:">
