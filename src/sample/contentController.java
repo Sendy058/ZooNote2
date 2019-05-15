@@ -32,19 +32,8 @@ public class contentController extends loginController implements Initializable 
     private Repairs repairs;
     private Users users;
 
-  /*  private BackgroundImage whiteBack = new BackgroundImage(new Image("image/Uvod_white.png",800,562,false,true),
-    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-    BackgroundSize.DEFAULT);
-
-    private BackgroundImage normalBack = new BackgroundImage(new Image("image/uvod2.png",800,562,false,true),
-            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-            BackgroundSize.DEFAULT);
-
-    int i = 0;
-*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        menoPriezvisko.setText(nameSurname);
         home = new Home();
         mainPane.setCenter(home);
     }
@@ -54,13 +43,7 @@ public class contentController extends loginController implements Initializable 
         Home home = new Home();
         mainPane.setCenter(home);
     }
-/*   @FXML
-    public void changeBackground() {
-        if (i==1) {
-            home.setBackground(new Background(whiteBack));
-        }else home.setBackground(new Background(normalBack));
-        i = 1-i;
-        }*/
+
     @FXML
     public void onFinancesBtnClick(){
         finances = new Finances();
@@ -100,6 +83,8 @@ public class contentController extends loginController implements Initializable 
         stage.setScene(scene);
     }
 
-
+    public void setNameSurname(String name, String surname){
+        menoPriezvisko.setText(name+" "+surname);
+    }
 
 }

@@ -40,15 +40,14 @@ public class RepairsController implements Initializable {
     @FXML
     private TableColumn<Repair, String> stavColumn;
 
-    private Repair[] repairsArr;
-    private Repair[] filteredArr;
     private ResultSet dataRepairs;
     private String lastSelectedName = "", selectedName = "";
-    public static Repair selectedItem;
+    private Repair selectedItem;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         filterBox.setItems(FXCollections.observableArrayList("Prebiehajúce", "Potvrdené", "Zamietnuté", new Separator(), "Všetky"));
+        filterBox.getSelectionModel().selectLast();
 
         try {
             insertIntoTable("4");
@@ -60,7 +59,7 @@ public class RepairsController implements Initializable {
             try {
                 if (filterBox.getSelectionModel().getSelectedItem() != null) {
                     System.out.println(newValue);
-                    System.out.println(newValue.toString()+" -index");
+                    System.out.println(newValue.toString() + " -index");
                     insertIntoTable(newValue.toString());
                 }
             } catch (SQLException e) {
@@ -84,14 +83,14 @@ public class RepairsController implements Initializable {
     private void insertIntoTable(String filter) throws SQLException {
         Connection connection = ConnectionClass.getConnection();
         PreparedStatement selectRepairs, selectCount;
-        ObservableList<Repair> repairsObservableList;
-
         String selectCountSQL = "SELECT Count(*) FROM opravy";
+        assert connection != null;
         selectCount = connection.prepareStatement(selectCountSQL);
         ResultSet arrLen = selectCount.executeQuery();
         arrLen.next();
 
-        filteredArr = new Repair[Integer.parseInt(arrLen.getString(1))];
+        ObservableList<Repair> filteredList = FXCollections.observableArrayList();
+        ObservableList<Repair> repairObservableList = FXCollections.observableArrayList();
 
         if (filter == null) {
             filter = "4";
@@ -101,12 +100,10 @@ public class RepairsController implements Initializable {
         selectRepairs = connection.prepareStatement(selectAllSQL);
 
         dataRepairs = selectRepairs.executeQuery();
-        repairsArr = new Repair[Integer.parseInt(arrLen.getString(1))];
         dataRepairs.next();
 
         String stavString = "";
         for (int i = 0; i < Integer.parseInt(arrLen.getString(1)); i++) {
-
             switch (dataRepairs.getInt(4)) {
                 case 0:
                     stavString = "Prebiehajúce";
@@ -118,28 +115,27 @@ public class RepairsController implements Initializable {
                     stavString = "Zamietnuté";
                     break;
             }
-            repairsArr[i] = new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5));
+            repairObservableList.add(new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5)));
 
-            System.out.println(dataRepairs.getString(4)+" data "+filter+" filter"+dataRepairs.getString(4).equals(filter)+" bool");
-            if (dataRepairs.getString(4).equals(filter)) {
-                filteredArr[i] = new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5));
-                System.out.println(filteredArr[i]+"-filter");
+            if (dataRepairs.getString(4).equals(filter) && !dataRepairs.getString(4).isEmpty()) {
+                filteredList.add(new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5)));
             }
-            //System.out.println(filteredArr[i]+" filteredArr");
             dataRepairs.next();
         }
-
         nazovColumn.setCellValueFactory(new PropertyValueFactory<>("nazov"));
         cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
         stavColumn.setCellValueFactory(new PropertyValueFactory<>("stav"));
+
         if (filter.equals("4")) {
-            repairsObservableList = FXCollections.observableArrayList(repairsArr);
+            repairsTable.setItems(repairObservableList);
         } else {
-            repairsObservableList = FXCollections.observableArrayList(filteredArr);
+            if (filteredList.isEmpty()) {
+                filteredList.add(null);
+            }
+            repairsTable.setItems(filteredList);
         }
-        repairsTable.setItems(repairsObservableList);
+        repairsTable.refresh();
         connection.close();
-        System.out.println("connection closed -repairs");
     }
 
     public void showFromTable() {
@@ -164,6 +160,7 @@ public class RepairsController implements Initializable {
     }
 
     private void setVisible(boolean bool) {
+
         if (loginController.curentlyLoggedUser.getType().equals("admin")) {
             dismissBtn.setVisible(bool);
             approveBtn.setVisible(bool);
@@ -183,16 +180,21 @@ public class RepairsController implements Initializable {
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
     public void showRepairInfo() throws IOException {
+        FXMLLoader Loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
+        Parent root2 = Loader.load();
+
+        RepairInfoController info = Loader.getController();
+        info.setText(selectedItem.getCena(), selectedItem.getNazov(), selectedItem.getPopis());
+
         Stage stage = new Stage();
-        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
         stage.setTitle("Informácie o oprave");
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
 
     private void setRepairStav(String stav) {
-        if (!stav.equals(null)) {
             Connection connection = ConnectionClass.getConnection();
             String updateSql = "UPDATE opravy SET stav = ? WHERE nazov_opravy LIKE ?";
             try {
@@ -218,6 +220,5 @@ public class RepairsController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else System.out.println("you fucked up");
     }
 }

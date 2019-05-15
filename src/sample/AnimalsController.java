@@ -26,7 +26,7 @@ public class AnimalsController implements Initializable {
     private ResultSet data, resultSetSize;
     private Animal animalArray[];
     private String lastSelectedName = "", selectedName = "";
-    public static Animal selectedItem;
+    private Animal selectedItem;
 
 
     @FXML
@@ -56,7 +56,6 @@ public class AnimalsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
             Connection connection = ConnectionClass.getConnection();
             System.out.println("CONNECTION INICIATED - initialize animal");
             String sqlQuery = "SELECT * FROM zviera";
@@ -173,8 +172,13 @@ public class AnimalsController implements Initializable {
 
 
     public void showAnimalInfo() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/AnimalInfo.fxml"));
         Stage stage = new Stage();
-        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AnimalInfo.fxml"));
+        Parent root2 = loader.load();
+
+        AnimalInfoController info = loader.getController();
+        info.setText(selectedItem.getZdravotna_karta(),selectedItem.getStav(),selectedItem.getMeno(),selectedItem.getDatum_narodenia(),selectedItem.getCelad(),selectedItem.getRad(),selectedItem.getTrieda(),selectedItem.getDruh());
+
         stage.setTitle("Informácie");
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
@@ -186,5 +190,6 @@ public class AnimalsController implements Initializable {
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
 
 }

@@ -6,6 +6,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,6 +16,7 @@ import javafx.util.Duration;
 import weather.Weather;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 
 import java.sql.Connection;
@@ -55,6 +57,7 @@ public class HomeControler implements Initializable {
     private String money;
     private PreparedStatement statement = null;
     private BankAccount acc;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -283,7 +286,6 @@ public class HomeControler implements Initializable {
         if (menoTomorrow.length() == 0) menoTomorrow = " ------";
         nameDay.setText(menoToday.substring(1));
         nameDayTomorrow.setText(menoTomorrow.substring(1));
-
-
     }
+
 }

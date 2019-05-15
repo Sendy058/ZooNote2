@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static sample.loginController.nameSurname;
+
 
 public class RequestUsersData {
 
@@ -34,9 +34,6 @@ public class RequestUsersData {
             user.setType(setOfData.getString("typ_konta"));
             user.setName(setOfData.getString("meno"));
             user.setSurname(setOfData.getString("priezvisko"));
-        }
-        if (user !=null) {
-            nameSurname = user.getName() + " " + user.getSurname(); //opravit
         }
         return user;
     }catch (SQLException ex) {

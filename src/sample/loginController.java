@@ -33,21 +33,14 @@ public class loginController implements Initializable {
     @FXML
     private Label zle;
 
+    private FXMLLoader loader;
 
-
-    static String nameSurname;
-
-
-    public static User curentlyLoggedUser;
-
-
-
+    public static  User curentlyLoggedUser;
 
     @FXML
     private void prihlasSa(){
         String login= meno.getText();
         String pass = Encryption.MD5(heslo.getText());
-
 
         RequestUsersData request = new RequestUsersData();
         curentlyLoggedUser = request.getUsersData(login, pass);
@@ -55,8 +48,11 @@ public class loginController implements Initializable {
         if (curentlyLoggedUser != null) {
             if (curentlyLoggedUser.getType().equals("admin")) {
                 try {
+                    loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
+                    Parent root = loader.load();
+                    contentController contentController = loader.getController();
+                    contentController.setNameSurname(curentlyLoggedUser.getName(),curentlyLoggedUser.getSurname());
                     Stage stage = (Stage) meno.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
                     stage.setTitle("ZooNote");
 
                     Scene scene = new Scene(root);
@@ -70,8 +66,11 @@ public class loginController implements Initializable {
 
             if (curentlyLoggedUser.getType().equals("opravar")) {
                     try {
+                        loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Mechanic.fxml"));
                         Stage stage = (Stage) prihlas.getScene().getWindow();
-                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Mechanic.fxml"));
+                        Parent root = loader.load();
+                        contentController contentController = loader.getController();
+                        contentController.setNameSurname(curentlyLoggedUser.getName(),curentlyLoggedUser.getSurname());
                         stage.setTitle("ZooNote");
 
                         Scene scene = new Scene(root);
@@ -79,14 +78,15 @@ public class loginController implements Initializable {
                         stage.show();
                     } catch (IOException e) {
                         e.printStackTrace();
-                        System.out.println(curentlyLoggedUser.getType());
-                        System.out.println("Nepodarilo sa nacitat RepairsLayout");
                     }
                 }
                 if (curentlyLoggedUser.getType().equals("osetrovatel")) {
                     try {
+                        loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Attendant.fxml"));
                         Stage stage = (Stage) meno.getScene().getWindow();
-                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Attendant.fxml"));
+                        Parent root = loader.load();
+                        contentController contentController = loader.getController();
+                        contentController.setNameSurname(curentlyLoggedUser.getName(),curentlyLoggedUser.getSurname());
                         stage.setTitle("ZooNote");
 
                         Scene scene = new Scene(root);
@@ -94,7 +94,6 @@ public class loginController implements Initializable {
                         stage.show();
                     } catch (IOException e) {
                         e.printStackTrace();
-                        System.out.println("Nepodarilo sa nacitat AttendantLayout");
                     }
                 }
             } else{
@@ -103,7 +102,6 @@ public class loginController implements Initializable {
                 heslo.setText("");
         }
     }
-
 
     @FXML
     private void ZabudolPass(){
@@ -124,6 +122,5 @@ public class loginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
 }
 
