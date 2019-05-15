@@ -26,6 +26,12 @@
     -fx-background-size:cover;
 }
 
+.backGr{
+    -fx-background-color: #c9fce2;
+
+
+}
+
 
 .textButton{
 -fx-text-fill:white;

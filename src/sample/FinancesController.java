@@ -58,7 +58,7 @@ public class FinancesController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     nacitaj();
-
+    total.setStyle("-fx-padding: 15 0 0 0;");
        // LoadData();
 
         try {
@@ -103,6 +103,7 @@ public class FinancesController  implements Initializable {
 
     @FXML
     private void opravyNacitaj(){
+        total.setStyle("-fx-padding: 10 0 0 0;");
         Pchart.setData(pieChartDataOpravy);
         Pchart.setTitle("Opravy");
         suma.setText(opravKomplet+" €");
@@ -111,6 +112,7 @@ public class FinancesController  implements Initializable {
 
     @FXML
     private void zamestnanciNacitaj(){
+        total.setStyle("-fx-padding: 10 0 0 0;");
         Pchart.setData(pieChartDataZamestnanci);
         Pchart.setTitle("Zamestnanci");
         suma.setText(zamesKomplet+" €");
@@ -118,6 +120,7 @@ public class FinancesController  implements Initializable {
 
     @FXML
     private void zvierataNacitaj(){
+        total.setStyle("-fx-padding: 10 0 0 0;");
         Pchart.setData(pieChartDataZvierata);
         Pchart.setTitle("Zvierata");
         suma.setText(zvieraKomplet+" €");
@@ -125,6 +128,7 @@ public class FinancesController  implements Initializable {
 
     @FXML
     private void totalNacitaj() {
+        total.setStyle("-fx-padding: 15 0 0 0;");
         Pchart.setData(pieChartDataTotal);
         Pchart.setTitle("Total");
         suma.setText(zvieraKomplet+opravKomplet+zamesKomplet+" €");

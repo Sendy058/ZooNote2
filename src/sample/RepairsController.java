@@ -49,6 +49,7 @@ public class RepairsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         filterBox.setItems(FXCollections.observableArrayList("Prebiehajúce", "Potvrdené", "Zamietnuté", new Separator(), "Všetky"));
+        filterBox.getSelectionModel().selectLast();
 
         try {
             insertIntoTable("4");

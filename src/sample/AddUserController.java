@@ -64,6 +64,20 @@ public class AddUserController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //Stage stage = (Stage) menoField.getScene().getWindow();
+       // stage.close();
+        /*Stage stage = (Stage) menoField.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
+        stage.setTitle("Pridanie Pouzivatela");
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();*/
+
+
+
+
+
     }
     private void register() throws SQLException {
         Connection connection = ConnectionClass.getConnection();
