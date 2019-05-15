@@ -1,13 +1,9 @@
 package sample;
 
-import sun.plugin2.message.Message;
-
 import java.math.*;
 import java.security.*;
 
 public class Encryption {
-
-
     public static String MD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

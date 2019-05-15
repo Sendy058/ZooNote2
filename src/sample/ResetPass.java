@@ -75,11 +75,9 @@ public class ResetPass implements Initializable {
             transport.connect(host, user, pass);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
-            System.out.println("message send successfully");
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.out.println("Chyba nepodarilo sa odoslat emial");
             return  false;
 
         }
@@ -88,17 +86,10 @@ public class ResetPass implements Initializable {
     public void kod(){
         String kod="";
         for (int i=0;i<6;i++){
-            kod=kod+Integer.toString((int)(Math.random()*10));
+            kod=kod + ((int)(Math.random()*10));
         }
         kodS=kod;
     }
-   /* ObservableList vyber= FXCollections.observableArrayList();
-    @FXML
-    private ChoiceBox<String> cb;*/
-
-
-   @FXML
-   private ImageView load;
    @FXML
    private ImageView back;
     @FXML
@@ -143,12 +134,12 @@ public class ResetPass implements Initializable {
                 mainPane.setCenter(pane);
                 ErrorResPass.setText("Odosielanie prebehlo úspešne");
 
-            }else ErrorResPass.setText("NEPODARLO SA ODOSLAT EMAIL");
+            }else ErrorResPass.setText("NEPODARLO SA ODOSLAŤ EMAIL");
 
 
        }
        else{
-           ErrorResPass.setText("Takéto uživateľske meno neexistuje");
+           ErrorResPass.setText("Zadané používateľské meno neexistuje!");
            loginRess.setText("");
        }
    }
@@ -165,7 +156,7 @@ public class ResetPass implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Nepodarilo sa nacitat Prihlasenie");
+            System.out.println("Nepodarilo sa načítať prihlásenie");
         }
     }
 
@@ -175,14 +166,14 @@ public class ResetPass implements Initializable {
            try {
                Stage stage = (Stage) back.getScene().getWindow();
                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/ResetPass33.fxml"));
-               stage.setTitle("Onovenie Hesla");
+               stage.setTitle("Obnova hesla");
 
                Scene scene = new Scene(root);
                stage.setScene(scene);
                stage.show();
            } catch (IOException e) {
                e.printStackTrace();
-               System.out.println("Nepodarilo sa nacitat obnovu hesla");
+               System.out.println("Nepodarilo sa načítať obnovu hesla");
            }
        }
        else {
@@ -191,17 +182,17 @@ public class ResetPass implements Initializable {
        }
      }
     @FXML
-     private void nastav()throws SQLException {
+     private void nastav(){
         String newHeslo = hesloRes.getText();
         String newHeslo2 = hesloRes2.getText();
         if (newHeslo.length() <= 5) {
-            ErrorResPass.setText("Heslo musi obsahovat minimalne 6 znakou");
+            ErrorResPass.setText("Heslo musí obsahovať minimálne 6 znakov");
         } else if (!newHeslo.equals(newHeslo2)) {
-            ErrorResPass.setText("Heslo sa nezhoduju");
+            ErrorResPass.setText("Heslá sa nezhodujú");
             hesloRes2.setText("");
         } else {
 
-            String password ="";
+            String password;
             password=Encryption.MD5(newHeslo);
 
             String sql = "UPDATE pouzivatel SET password = ? WHERE email = ?";
@@ -223,31 +214,18 @@ public class ResetPass implements Initializable {
             try {
                 Stage stage = (Stage) back.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/sample.fxml"));
-                stage.setTitle("Prihlasenie");
+                stage.setTitle("Prihlásenie");
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Nepodarilo sa nacitat prihlasenie");
+                System.out.println("Nepodarilo sa načítať prihlásenie");
             }
 
         }
     }
-    public void initialize(URL location, ResourceBundle resources) {
-
-
-    }
-
-
-   /* private void LoadData(){
-        vyber.addAll(vyber);
-        String a="Ošetrovateľ ";
-        String b="Opravar";
-        vyber.addAll(a,b);
-        cb.getItems().addAll(vyber);
-    }
-*/
+    public void initialize(URL location, ResourceBundle resources) {}
 
 }
