@@ -90,7 +90,7 @@ public class AddMessages extends loginController implements Initializable {
             System.out.println(data[3]);
     System.out.println(data[0]);
             if(data[0].equals("2")) {
-            data[3]=null;
+            data[3]="0";
     }
 
          if(data[3].isEmpty()||data[2].isEmpty()||data[1].isEmpty()){
@@ -139,20 +139,24 @@ public class AddMessages extends loginController implements Initializable {
         if (typBox.getValue().equals("Správa")) {
             cenaText.setVisible(true);
             cenaFile.setVisible(true);
-            prijemcaBox.getItems().removeAll(vyberPrijemca);
-            prijemcaBox.getItems().addAll(vyberOperacia);
-            prijemcaBox.getSelectionModel().selectFirst();
-            changeText.setText("OPERÁCIA:");
+            if (curentlyLoggedUser.getType().equals("admin")) {
+                prijemcaBox.getItems().removeAll(vyberPrijemca);
+                prijemcaBox.getItems().addAll(vyberOperacia);
+                prijemcaBox.getSelectionModel().selectFirst();
+                changeText.setText("OPERÁCIA:");
+            }
 
 
         }
         else {
             cenaText.setVisible(false);
             cenaFile.setVisible(false);
-            prijemcaBox.getItems().removeAll(vyberOperacia);
-            prijemcaBox.getItems().addAll(vyberPrijemca);
-            prijemcaBox.getSelectionModel().selectFirst();
-            changeText.setText("PRÍJEMCA:");
+            if (curentlyLoggedUser.getType().equals("admin")) {
+                prijemcaBox.getItems().removeAll(vyberOperacia);
+                prijemcaBox.getItems().addAll(vyberPrijemca);
+                prijemcaBox.getSelectionModel().selectFirst();
+                changeText.setText("PRÍJEMCA:");
+            }
 
         }
     }
@@ -190,12 +194,16 @@ public class AddMessages extends loginController implements Initializable {
                 break;
             case "osetrovatel": {
                 vyberPrijemca.addAll(a1, b1);
+                prijemcaBox.getItems().addAll(vyberPrijemca);
+                prijemcaBox.getSelectionModel().selectFirst();
 
 
             }
                 break;
             case "opravar": {
                 vyberPrijemca.addAll(a1, c1);
+                prijemcaBox.getItems().addAll(vyberPrijemca);
+                prijemcaBox.getSelectionModel().selectFirst();
                 typBox.setVisible(false);
                 cenaFile.setVisible(false);
                 cenaText.setVisible(false);
