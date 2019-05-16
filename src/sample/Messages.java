@@ -20,88 +20,55 @@ public class Messages {
         this.odosielatel = new SimpleStringProperty(odosielatel);
         this.datum = new SimpleStringProperty(datum);
     }
+    public Messages(){}
 
     public String getTypSpravy() {
         return typSpravy.get();
     }
 
-    public SimpleStringProperty typSpravyProperty() {
-        return typSpravy;
+    public void setTypSpravy(String typSpravy) { this.typSpravy = new SimpleStringProperty(typSpravy);
     }
-
     public String getNazovSpravy() {
         return nazovSpravy.get();
     }
 
-    public SimpleStringProperty nazovSpravyProperty() {
-        return nazovSpravy;
+    public void setNazovSpravy(String nazovSpravy) { this.nazovSpravy= new SimpleStringProperty(nazovSpravy);
     }
 
-    public String getObsah() {
-        return obsah.get();
+    public String getObsah () { return obsah .get();
     }
 
-    public SimpleStringProperty obsahProperty() {
-        return obsah;
+    public void setObsah (String obsah ) { this.obsah  = new SimpleStringProperty(obsah );
     }
 
-    public String getCena() {
-        return cena.get();
+    public String getCena() { return cena.get();
     }
 
-    public SimpleStringProperty cenaProperty() {
-        return cena;
+    public void setCena(String cena) { this.cena = new SimpleStringProperty(cena);
     }
 
     public String getPrijemca() {
         return prijemca.get();
     }
 
-    public SimpleStringProperty prijemcaProperty() {
-        return prijemca;
+    public void setPrijemca(String prijemca) {
+        this.prijemca = new SimpleStringProperty(prijemca);
     }
 
     public String getOdosielatel() {
         return odosielatel.get();
     }
 
-    public SimpleStringProperty odosielatelProperty() {
-        return odosielatel;
+    public void setOdosielatel(String odosielatel) {
+        this.odosielatel = new SimpleStringProperty(odosielatel);
     }
-
     public String getDatum() {
         return datum.get();
     }
 
-    public SimpleStringProperty datumProperty() {
-        return datum;
-    }
-
-    public void setTypSpravy(String typSpravy) {
-        this.typSpravy.set(typSpravy);
-    }
-
-    public void setNazovSpravy(String nazovSpravy) {
-        this.nazovSpravy.set(nazovSpravy);
-    }
-
-    public void setObsah(String obsah) {
-        this.obsah.set(obsah);
-    }
-
-    public void setCena(String cena) {
-        this.cena.set(cena);
-    }
-
-    public void setPrijemca(String prijemca) {
-        this.prijemca.set(prijemca);
-    }
-
-    public void setOdosielatel(String odosielatel) {
-        this.odosielatel.set(odosielatel);
-    }
-
     public void setDatum(String datum) {
-        this.datum.set(datum);
+        this.datum = new SimpleStringProperty(datum);
     }
+
+
 }

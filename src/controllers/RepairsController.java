@@ -65,7 +65,9 @@ public class RepairsController extends loginController implements Initializable 
                 e.printStackTrace();
             }
         });
+
         if (currentlyLoggedUser.getType().equals("opravar")) {
+
             addRepairBtn.setVisible(true);
         } else addRepairBtn.setVisible(false);
 
@@ -74,15 +76,15 @@ public class RepairsController extends loginController implements Initializable 
         showInfoBtn.setVisible(false);
 
         dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (selectedItem.getStav().equals("1")) {
-                setRepairStav("2");
+            if(selectedItem.getStav().equals("Potvrdené")) {
+                setRepairStav("Zamietnuté");
                 plusBankovyUcet(selectedItem.getCena());
             }
         });
         approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (selectedItem.getStav().equals("2")){
+            if (selectedItem.getStav().equals("Zamietnuté")) {
                 minusBankovyUcet(selectedItem.getCena());
-                setRepairStav("1");
+                setRepairStav("Potvrdené");
             }
         });
     }
@@ -172,7 +174,7 @@ public class RepairsController extends loginController implements Initializable 
             approveBtn.setVisible(bool);
             showInfoBtn.setVisible(bool);
 
-        } else if (currentlyLoggedUser.getType().equals("opravar")) {
+        } else {
             dismissBtn.setVisible(false);
             approveBtn.setVisible(false);
             showInfoBtn.setVisible(bool);
@@ -186,6 +188,7 @@ public class RepairsController extends loginController implements Initializable 
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
 
 
     public void showRepairInfo() throws IOException {
@@ -202,6 +205,18 @@ public class RepairsController extends loginController implements Initializable 
     }
 
     private void setRepairStav(String stav) {
+        repairsTable.getSelectionModel().getSelectedItem().setStav(stav);
+        repairsTable.refresh();
+
+        switch (stav) {
+            case "Potvrdené":
+                stav = "1";
+                break;
+            case "Zamietnuté":
+                stav = "2";
+                break;
+        }
+
         Connection connection = ConnectionClass.getConnection();
         String updateSql = "UPDATE opravy SET stav = ? WHERE nazov_opravy LIKE ?";
         try {
@@ -212,16 +227,7 @@ public class RepairsController extends loginController implements Initializable 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        switch (stav) {
-            case "1":
-                stav = "Potvrdené";
-                break;
-            case "2":
-                stav = "Zamietnuté";
-                break;
-        }
-        repairsTable.getSelectionModel().getSelectedItem().setStav(stav);
-        repairsTable.refresh();
+
         try {
             connection.close();
         } catch (SQLException e) {
@@ -230,11 +236,14 @@ public class RepairsController extends loginController implements Initializable 
     }
 
     private void minusBankovyUcet(Double cena){
+        Connection connection = ConnectionClass.getConnection();
+        String sqlMinus = "UPDATE bankovy_ucet SET "
 
+        System.out.println("-"+cena);
     }
 
     private void plusBankovyUcet(Double cena){
-
+        System.out.println("+"+cena);
     }
 
 }

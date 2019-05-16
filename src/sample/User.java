@@ -3,7 +3,7 @@ package sample;
 import javafx.beans.property.SimpleStringProperty;
 
 public class User {
-
+    private SimpleStringProperty id=null;
     private SimpleStringProperty username = null;
     private SimpleStringProperty password = null ;
     private SimpleStringProperty type = null;
@@ -11,6 +11,14 @@ public class User {
     private SimpleStringProperty surname = null;
     private SimpleStringProperty email = null;
 
+    public User(String id,String name, String surname, String username, String email, String type){
+        this.id=new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.surname = new SimpleStringProperty(surname);
+        this.username = new SimpleStringProperty(username);
+        this.email = new SimpleStringProperty(email);
+        this.type = new SimpleStringProperty(type);
+    }
     public User(String name, String surname, String username, String email, String type){
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);

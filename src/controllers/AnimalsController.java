@@ -142,7 +142,7 @@ public class AnimalsController extends loginController implements Initializable 
         if (currentlyLoggedUser.getType().equals("admin")) {
             deleteBtn.setVisible(false);
             addBtn.setVisible(false);
-        } else if (currentlyLoggedUser.getType().equals("osetrovatel")) {
+        } else{
             deleteBtn.setVisible(bool);
         }
         zdravKartaBtn.setVisible(bool);

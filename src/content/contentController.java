@@ -46,18 +46,19 @@ public class contentController extends loginController implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        menoPriezvisko.setText(currentlyLoggedUser.getName()+" "+currentlyLoggedUser.getSurname());
-        home = new Home();
-        mainPane.setCenter(home);
-        Butons.addAll(homeBtn,financeBtn,zvierataBtn,spraviBtn,opraviBtn,kontaBtn);
-        for (Button btn:Butons) {
-            if (btn==homeBtn) {
-                btn.setStyle("-fx-text-fill:black;" +
-                        "-fx-background-color: #80906c;");
+     menoPriezvisko.setText(currentlyLoggedUser.getName()+" "+currentlyLoggedUser.getSurname());
+            home = new Home();
+            mainPane.setCenter(home);
+            Butons.addAll(homeBtn, financeBtn, zvierataBtn, spraviBtn, opraviBtn, kontaBtn);
+            for (Button btn : Butons) {
+                if (btn == homeBtn) {
+                    btn.setStyle("-fx-text-fill:black;" +
+                            "-fx-background-color: #80906c;");
+                } else {
+                    btn.setStyle("-fx-text-fill:white;" +
+                            "-fx-background-color: #80906c;");
+
             }
-            else{
-                btn.setStyle("-fx-text-fill:white;" +
-                        "-fx-background-color: #80906c;"); }
         }
 
     }

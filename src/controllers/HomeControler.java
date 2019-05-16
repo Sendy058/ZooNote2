@@ -71,6 +71,7 @@ public class HomeControler extends loginController implements Initializable {
             statement = connection.prepareStatement(sql);
             ResultSet setOfData = statement.executeQuery();
 
+
             acc = new BankAccount();
             acc.setStav(setOfData.getDouble("stav"));
 

@@ -277,6 +277,9 @@ public class FinancesController  implements Initializable {
                                 zvierata.getName(), " ", zvierata.pieValueProperty(), "€"
                         )
                 ));
+        connection.close();
+        user.close();
+        zvierata.close();
 
     }
 

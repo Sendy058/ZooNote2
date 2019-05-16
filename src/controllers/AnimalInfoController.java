@@ -61,10 +61,8 @@ public class AnimalInfoController extends loginController implements Initializab
         druhLabel.setText(druh);
         zdravotnaKartaLabel.setText(zdravotnaKarta);
     }
-
-    public void changeLabels() {
-
-        if (user.getType().equals("osetrovatel")) {
+    public void changeLabels(){
+        if (currentlyLoggedUser.getType().equals("osetrovatel")) {
 
             stavLabel.setVisible(false);
             stavField.setVisible(true);

@@ -38,7 +38,6 @@ public class loginController implements Initializable {
     protected static User currentlyLoggedUser;
     private Parent root;
 
-
     @FXML
     private void prihlasSa() {
         String login = meno.getText();
