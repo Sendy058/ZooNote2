@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
    <children>
-      <Label alignment="CENTER" layoutX="115.0" layoutY="92.0" prefHeight="17.0" prefWidth="71.0" text="INVOICES" />
+      <TableView fx:id="messagesTable" layoutX="76.0" layoutY="91.0" onMouseClicked="#showFromTable" prefHeight="392.0" prefWidth="686.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
+         <columns>
+            <TableColumn fx:id="nazovColumn" prefWidth="160.800048828125" resizable="false" text="PREDMET" />
+            <TableColumn fx:id="typColumn" minWidth="0.0" prefWidth="185.6000518798828" resizable="false" text="TYP" />
+            <TableColumn fx:id="odosielatelColumn" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
+            <TableColumn fx:id="datumColumn" prefWidth="130.39996337890625" text="DÁTUM" />
+            <TableColumn fx:id="stavColumn1" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
+            <TableColumn fx:id="stavColumn11" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
+            <TableColumn fx:id="odosColu" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
+         </columns>
+      </TableView>
    </children>
 </fx:root>

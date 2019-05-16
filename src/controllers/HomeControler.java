@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.fxml.FXMLLoader;
 import sample.BankAccount;
 import connectivity.ConnectionClass;
 import javafx.animation.Animation;
@@ -14,10 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import sample.RequestUsersData;
-import sample.User;
 import weather.Weather;
 
-import java.io.IOException;
 import java.net.URL;
 
 import java.sql.Connection;
@@ -34,7 +31,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HomeControler implements Initializable {
+public class HomeControler extends loginController implements Initializable {
 
     private ResultSet date, resultSetSize;
     @FXML
@@ -51,27 +48,23 @@ public class HomeControler implements Initializable {
     private Label nameDayTomorrow;
     @FXML
     private Line balanceLine;
-
     @FXML
     private Label balance, balanceText;
 
     private String money;
     private PreparedStatement statement = null;
     private BankAccount acc;
-    private User user;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        /*if (!user.getType().equals("admin")) {
-            balance.setVisible(false);
-            balanceText.setVisible(false);
+        if (!currentlyLoggedUser.getType().equals("admin")) {
             balanceLine.setVisible(false);
-        }*/
-
+            balanceText.setVisible(false);
+            balance.setVisible(false);
+        }
 
         Connection connection = ConnectionClass.getConnection();
+
         String sql = "SELECT stav FROM bankovy_ucet WHERE id IS 1";
 
         try {
@@ -100,7 +93,6 @@ public class HomeControler implements Initializable {
             }
         }
 
-        System.out.println(acc.getStav());
         money = String.valueOf(acc.getStav());
 
         balance.setText(money + "€");
@@ -114,7 +106,6 @@ public class HomeControler implements Initializable {
 
         Weather pocasie = new Weather();
         teplota.setText((pocasie.getTemp()) + " °C");
-        System.out.println(pocasie.getDesc());
         Image img1 = new Image("image/pocasie1.png");
         Image img2 = new Image("image/pocasie2.png");
         Image img3 = new Image("image/pocasie3.png");
@@ -195,7 +186,6 @@ public class HomeControler implements Initializable {
     }
 
     private void initClock() {
-
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             cas.setText(LocalDateTime.now().format(formatter));
@@ -285,9 +275,4 @@ public class HomeControler implements Initializable {
         nameDayTomorrow.setText(menoTomorrow.substring(1));
     }
 
-    public void getCurrentlyLoggedUser(User u) {
-        user = u;
-        System.out.println(u+" -u");
-        System.out.println(user+" -user");
-    }
 }

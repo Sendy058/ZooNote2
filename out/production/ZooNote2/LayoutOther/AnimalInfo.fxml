@@ -92,7 +92,7 @@
       </Label>
       <ImageView fitHeight="53.0" fitWidth="73.0" layoutX="172.0" layoutY="535.0" onMouseClicked="#updateAnimal" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/updateBtnImg.png" />
+            <Image url="@../image/checkMark.png" />
          </image>
       </ImageView>
    </children>

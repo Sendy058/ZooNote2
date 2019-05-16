@@ -25,7 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RepairsController implements Initializable {
+public class RepairsController extends loginController implements Initializable {
 
     @FXML
     private ChoiceBox filterBox = new ChoiceBox();
@@ -40,7 +40,6 @@ public class RepairsController implements Initializable {
     @FXML
     private TableColumn<Repair, String> stavColumn;
     @FXML
-    private Label workaroundLabel;
 
     private ResultSet dataRepairs;
     private String lastSelectedName = "", selectedName = "";
@@ -51,9 +50,6 @@ public class RepairsController implements Initializable {
         filterBox.setItems(FXCollections.observableArrayList("Prebiehajúce", "Potvrdené", "Zamietnuté", new Separator(), "Všetky"));
         filterBox.getSelectionModel().selectLast();
 
-        workaroundLabel.setVisible(false);
-
-
         try {
             insertIntoTable("4");
         } catch (SQLException e) {
@@ -63,16 +59,13 @@ public class RepairsController implements Initializable {
         filterBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 if (filterBox.getSelectionModel().getSelectedItem() != null) {
-                    System.out.println(newValue);
-                    System.out.println(newValue.toString() + " -index");
                     insertIntoTable(newValue.toString());
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
-
-        if (workaroundLabel.getText().equals("opravar")) {
+        if (currentlyLoggedUser.getType().equals("opravar")) {
             addRepairBtn.setVisible(true);
         } else addRepairBtn.setVisible(false);
 
@@ -80,9 +73,18 @@ public class RepairsController implements Initializable {
         dismissBtn.setVisible(false);
         showInfoBtn.setVisible(false);
 
-        dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> setRepairStav("2"));
-        approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> setRepairStav("1"));
-
+        dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (selectedItem.getStav().equals("1")) {
+                setRepairStav("2");
+                plusBankovyUcet(selectedItem.getCena());
+            }
+        });
+        approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (selectedItem.getStav().equals("2")){
+                minusBankovyUcet(selectedItem.getCena());
+                setRepairStav("1");
+            }
+        });
     }
 
     private void insertIntoTable(String filter) throws SQLException {
@@ -122,7 +124,7 @@ public class RepairsController implements Initializable {
             }
             repairObservableList.add(new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5)));
 
-            if (dataRepairs.getString(4).equals(filter) && !dataRepairs.getString(4).isEmpty()) {
+            if (dataRepairs.getString(4).equals(filter)) {
                 filteredList.add(new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5)));
             }
             dataRepairs.next();
@@ -165,13 +167,12 @@ public class RepairsController implements Initializable {
     }
 
     private void setVisible(boolean bool) {
-
-        if (workaroundLabel.getText().equals("admin")) {
+        if (currentlyLoggedUser.getType().equals("admin")) {
             dismissBtn.setVisible(bool);
             approveBtn.setVisible(bool);
             showInfoBtn.setVisible(bool);
 
-        } else if (workaroundLabel.getText().equals("opravar")) {
+        } else if (currentlyLoggedUser.getType().equals("opravar")) {
             dismissBtn.setVisible(false);
             approveBtn.setVisible(false);
             showInfoBtn.setVisible(bool);
@@ -185,6 +186,7 @@ public class RepairsController implements Initializable {
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
 
     public void showRepairInfo() throws IOException {
         FXMLLoader Loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
@@ -226,9 +228,13 @@ public class RepairsController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void getCurrentlyLoggedUser(User u) {
-        workaroundLabel.setText(u.getType());
-        System.out.println(workaroundLabel.getText()+"labeltext");
+
+    private void minusBankovyUcet(Double cena){
+
     }
+
+    private void plusBankovyUcet(Double cena){
+
+    }
+
 }

@@ -26,7 +26,6 @@ public class contentController extends loginController implements Initializable 
 
     private Home home;
     private Finances finances;
-    private Animals animals;
     private Invoices invoices;
     private Repairs repairs;
     private Users users;
@@ -45,21 +44,9 @@ public class contentController extends loginController implements Initializable 
     private Button kontaBtn;
     private ObservableList<Button> Butons = FXCollections.observableArrayList();
 
-
-
-
-    /*  private BackgroundImage whiteBack = new BackgroundImage(new Image("image/Uvod_white.png",800,562,false,true),
-      BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-      BackgroundSize.DEFAULT);
-
-      private BackgroundImage normalBack = new BackgroundImage(new Image("image/uvod2.png",800,562,false,true),
-              BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-              BackgroundSize.DEFAULT);
-
-      int i = 0;
-  */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        menoPriezvisko.setText(currentlyLoggedUser.getName()+" "+currentlyLoggedUser.getSurname());
         home = new Home();
         mainPane.setCenter(home);
         Butons.addAll(homeBtn,financeBtn,zvierataBtn,spraviBtn,opraviBtn,kontaBtn);
@@ -73,13 +60,13 @@ public class contentController extends loginController implements Initializable 
                         "-fx-background-color: #80906c;"); }
         }
 
-
     }
 
     @FXML
     public void onHomeBtnClick() {
         home = new Home();
         mainPane.setCenter(home);
+
         for (Button btn:Butons) {
             if (btn==homeBtn) {
                 btn.setStyle("-fx-text-fill:black;" +
@@ -106,7 +93,7 @@ public class contentController extends loginController implements Initializable 
 
     @FXML
     public void onAnimalsBtnClick() {
-        animals = new Animals();
+        Animals animals = new Animals();
         mainPane.setCenter(animals);
         for (Button btn:Butons) {
             if (btn==zvierataBtn) {
@@ -167,12 +154,9 @@ public class contentController extends loginController implements Initializable 
         Scene scene = new Scene(root);
         Stage stage = (Stage) menoPriezvisko.getScene().getWindow();
         stage.setScene(scene);
+        currentlyLoggedUser.setType("");
     }
 
-    @FXML
-    public void setNameSurname(String name, String surname){
-        menoPriezvisko.setText(name+" "+surname);
-    }
 
 
 }

@@ -1,6 +1,8 @@
 package controllers;
 
 import connectivity.ConnectionClass;
+import content.Users;
+import content.contentController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,8 +14,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.Encryption;
+import sample.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,18 +45,19 @@ public class AddUserController implements Initializable {
     private TextField hesloField;
     @FXML
     private Label zle;
+    private contentController user;
 
     private String data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
-        Stage stage = (Stage) zaregistruj.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
-        stage.setTitle("Admin");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Users.fxml"));
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+        }
     public void getFromFields(){
         data[3] = menoField.getText();
         data[4] = priezviskoField.getText();
@@ -65,6 +70,20 @@ public class AddUserController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //Stage stage = (Stage) menoField.getScene().getWindow();
+       // stage.close();
+        /*Stage stage = (Stage) menoField.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
+        stage.setTitle("Pridanie Pouzivatela");
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();*/
+
+
+
+
+
     }
     private void register() throws SQLException {
         Connection connection = ConnectionClass.getConnection();
@@ -106,5 +125,6 @@ public class AddUserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoadData();
+        user=new contentController();
     }
 }
