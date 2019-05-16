@@ -5,8 +5,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-class Repairs extends AnchorPane {
-     Repairs() {
+public class Repairs extends AnchorPane {
+    public Repairs() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Repairs.fxml"));
 
         fxmlLoader.setRoot(this);

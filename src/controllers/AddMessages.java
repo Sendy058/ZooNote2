@@ -162,13 +162,13 @@ public class AddMessages extends loginController implements Initializable {
         if (typBox.getValue().equals("Správa")) {
             cenaText.setVisible(true);
             cenaFile.setVisible(true);
-            if (curentlyLoggedUser.getType().equals("admin")) {
+            if (currentlyLoggedUser.getType().equals("admin")) {
                 prijemcaBox.getItems().removeAll(vyberPrijemca);
                 prijemcaBox.getItems().addAll(vyberOperacia);
                 prijemcaBox.getSelectionModel().selectFirst();
                 changeText.setText("OPERÁCIA:");
             }
-            if (curentlyLoggedUser.getType().equals("osetrovatel")) {
+            if (currentlyLoggedUser.getType().equals("osetrovatel")) {
                 prijemcaBox.setVisible(false);
                 changeText.setVisible(false);
                 pomoc=1;
@@ -178,13 +178,13 @@ public class AddMessages extends loginController implements Initializable {
         else {
             cenaText.setVisible(false);
             cenaFile.setVisible(false);
-            if (curentlyLoggedUser.getType().equals("admin")) {
+            if (currentlyLoggedUser.getType().equals("admin")) {
                 prijemcaBox.getItems().removeAll(vyberOperacia);
                 prijemcaBox.getItems().addAll(vyberPrijemca);
                 prijemcaBox.getSelectionModel().selectFirst();
                 changeText.setText("PRÍJEMCA:");
             }
-            if (curentlyLoggedUser.getType().equals("osetrovatel")) {
+            if (currentlyLoggedUser.getType().equals("osetrovatel")) {
                 prijemcaBox.setVisible(true);
                 changeText.setVisible(true);
                 pomoc=0;
@@ -215,7 +215,7 @@ public class AddMessages extends loginController implements Initializable {
             String b1="Opravár";
             String c1="Ošetrovateľ";
 
-        switch (curentlyLoggedUser.getType()) {
+        switch (currentlyLoggedUser.getType()) {
             case "admin":{
                 vyberPrijemca.addAll(b1, c1);
                 prijemcaBox.getItems().addAll(vyberOperacia);
@@ -275,7 +275,7 @@ public class AddMessages extends loginController implements Initializable {
         Connection connection = ConnectionClass.getConnection();
 
         PreparedStatement statementForKonto = connection.prepareStatement(sql);
-        statementForKonto.setString(1,curentlyLoggedUser.getUsername() );
+        statementForKonto.setString(1,currentlyLoggedUser.getUsername() );
         ResultSet Konto = statementForKonto.executeQuery();
         Konto.next();
 

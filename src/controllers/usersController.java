@@ -52,7 +52,7 @@ public class usersController implements Initializable {
     private Label errMessage;
 
     private ResultSet data, resultSetSize;
-    private User userArray[];
+    private ObservableList<User> userList = FXCollections.observableArrayList();
     private String lastSelectedUsername = "",selectedUsername;
     private User selectedItem;
 
@@ -85,11 +85,10 @@ public class usersController implements Initializable {
     private void insertIntoTable() {
         try {
             Connection connection = ConnectionClass.getConnection();
-            userArray = new User[Integer.parseInt(resultSetSize.getString(1))];
             data.next();
-            for (int i = 0; i < userArray.length; i++) {
+            for (int i = 0; i < Integer.parseInt(resultSetSize.getString(1)); i++) {
                 if (!data.isClosed()) {
-                    userArray[i] = new User(data.getString(5), data.getString(6), data.getString(2), data.getString(7), data.getString(4));
+                    userList.add(new User(data.getString(5), data.getString(6), data.getString(2), data.getString(7), data.getString(4)));
                     data.next();
                 }
             }
@@ -98,7 +97,7 @@ public class usersController implements Initializable {
             usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
             emailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
-            ObservableList<User> userObservableListList = FXCollections.observableArrayList(userArray);
+            ObservableList<User> userObservableListList = FXCollections.observableArrayList(userList);
             usersTable.setItems(userObservableListList);
             connection.close();
 

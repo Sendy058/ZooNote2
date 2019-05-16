@@ -21,15 +21,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AnimalsController extends loginController implements Initializable {
     private ResultSet data, resultSetSize;
-    private Animal animalArray[];
     private String lastSelectedName = "", selectedName = "";
-    public static Animal selectedItem;
-
+    private Animal selectedItem;
+    private int size;
+    private ObservableList<Animal> animalList = FXCollections.observableArrayList();
 
     @FXML
     private TableView<Animal> animalsTable;
@@ -51,75 +53,83 @@ public class AnimalsController extends loginController implements Initializable 
     private ImageView addBtn;
     @FXML
     private ImageView zdravKartaBtn;
-
+    @FXML
+    private TextField searchField;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Connection connection = ConnectionClass.getConnection();
+        String sqlQuery = "SELECT * FROM zviera";
+        String countQuery = "SELECT Count(*) FROM zviera";
 
-            Connection connection = ConnectionClass.getConnection();
-            String sqlQuery = "SELECT * FROM zviera";
-            String countQuery = "SELECT Count(*) FROM zviera";
-
-            PreparedStatement preparedQuery, preparedCountStatement;
-            try {
-                preparedCountStatement = connection.prepareStatement(countQuery);
-                resultSetSize = preparedCountStatement.executeQuery();
-                resultSetSize.next();
-                preparedQuery = connection.prepareStatement(sqlQuery);
-                data = preparedQuery.executeQuery();
-                insertIntoTable();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            setVisible(false);
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-    }
-
-
-    private void insertIntoTable() {
+        PreparedStatement preparedQuery, preparedCountStatement;
         try {
-            Connection connection = ConnectionClass.getConnection();
-            animalArray = new Animal[Integer.parseInt(resultSetSize.getString(1))];
+            preparedCountStatement = connection.prepareStatement(countQuery);
+            resultSetSize = preparedCountStatement.executeQuery();
+            size = resultSetSize.getInt(1);
+            preparedQuery = connection.prepareStatement(sqlQuery);
+            data = preparedQuery.executeQuery();
             data.next();
-            for (int i = 0; i < animalArray.length; i++) {
-                if (!data.isClosed()) {
-                    animalArray[i] = new Animal(data.getString(2), data.getString(3), data.getString(4),data.getString(5), data.getString(6), data.getString(7), data.getString(8),data.getString(9));
-                    data.next();
-                }
+            for (int i = 0; i < size; i++) {
+                animalList.add(new Animal(data.getString(2), data.getString(3), data.getString(4), data.getString(5), data.getString(6), data.getString(7), data.getString(8), data.getString(9)));
+                data.next();
             }
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("meno"));
-            dateColumn.setCellValueFactory(new PropertyValueFactory<>("datum_narodenia"));
-            stavColumn.setCellValueFactory(new PropertyValueFactory<>("stav"));
-            triedaColumn.setCellValueFactory(new PropertyValueFactory<>("trieda"));
-            celadColumn.setCellValueFactory(new PropertyValueFactory<>("celad"));
-            radColumn.setCellValueFactory(new PropertyValueFactory<>("rad"));
-            ObservableList<Animal> animalObservableListList = FXCollections.observableArrayList(animalArray);
-            animalsTable.setItems(animalObservableListList);
-            connection.close();
-
+            insertIntoTable("");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        setVisible(false);
+
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            insertIntoTable(newValue);
+        });
+
+    }
+
+    private void insertIntoTable(String filter) {
+        ObservableList<Animal> animalFilteredList = FXCollections.observableArrayList();
+        animalFilteredList.addAll(0, animalList);
+
+        for (Iterator<Animal> iter = animalFilteredList.iterator(); iter.hasNext(); ) {
+            if (!iter.next().getMeno().toLowerCase().startsWith(filter.toLowerCase())) {
+                iter.remove();
+            }
+        }
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("meno"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("datum_narodenia"));
+        stavColumn.setCellValueFactory(new PropertyValueFactory<>("stav"));
+        triedaColumn.setCellValueFactory(new PropertyValueFactory<>("trieda"));
+        celadColumn.setCellValueFactory(new PropertyValueFactory<>("celad"));
+        radColumn.setCellValueFactory(new PropertyValueFactory<>("rad"));
+
+        if (animalFilteredList.size() == 0) {
+            animalFilteredList.add(null);
+        }
+        animalsTable.setItems(animalFilteredList);
+        animalsTable.refresh();
     }
 
     public void showFromTable() {
         try {
+            setVisible(true);
+
             lastSelectedName = selectedName;
             selectedName = animalsTable.getSelectionModel().getSelectedItem().getMeno();
             selectedItem = animalsTable.getSelectionModel().getSelectedItem();
-
-            setVisible(true);
 
         } catch (NullPointerException e) {
             setVisible(false);
             selectedName = "";
         }
         if (selectedName.equals(lastSelectedName)) {
+
             setVisible(false);
 
             lastSelectedName = selectedName;
@@ -129,15 +139,13 @@ public class AnimalsController extends loginController implements Initializable 
     }
 
     private void setVisible(boolean bool) {
-        if (curentlyLoggedUser.getType().equals("admin")) {
+        if (currentlyLoggedUser.getType().equals("admin")) {
             deleteBtn.setVisible(false);
             addBtn.setVisible(false);
-            zdravKartaBtn.setVisible(bool);
-
-        } else if (curentlyLoggedUser.getType().equals("osetrovatel")) {
+        } else{
             deleteBtn.setVisible(bool);
-            zdravKartaBtn.setVisible(bool);
         }
+        zdravKartaBtn.setVisible(bool);
     }
 
     public void deleteAnimal() {
@@ -165,18 +173,25 @@ public class AnimalsController extends loginController implements Initializable 
 
 
     public void showAnimalInfo() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/AnimalInfo.fxml"));
         Stage stage = new Stage();
-        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AnimalInfo.fxml"));
+        Parent root2 = loader.load();
+
+        AnimalInfoController info = loader.getController();
+        info.setText(selectedItem.getZdravotna_karta(), selectedItem.getStav(), selectedItem.getMeno(), selectedItem.getDatum_narodenia(), selectedItem.getCelad(), selectedItem.getRad(), selectedItem.getTrieda(), selectedItem.getDruh());
+
         stage.setTitle("Informácie");
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
     public void showAddAnimal() throws IOException {
-       Stage  stage = new Stage();
+        Stage stage = new Stage();
         Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddAnimal.fxml"));
         stage.setTitle("Pridanie zvieratka");
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
 
 }

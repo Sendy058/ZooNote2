@@ -34,32 +34,26 @@ public class loginController implements Initializable {
     @FXML
     private Label zle;
 
-
-
-    public static String nameSurname;
-
-
-     protected static User curentlyLoggedUser;
-
-
-
+    private FXMLLoader loader;
+    protected static User currentlyLoggedUser;
+    private Parent root;
 
     @FXML
-    private void prihlasSa(){
-        String login= meno.getText();
+    private void prihlasSa() {
+        String login = meno.getText();
         String pass = Encryption.MD5(heslo.getText());
 
-
         RequestUsersData request = new RequestUsersData();
-        curentlyLoggedUser = request.getUsersData(login, pass);
+        currentlyLoggedUser = request.getUsersData(login, pass);
 
-        if (curentlyLoggedUser != null) {
-            if (curentlyLoggedUser.getType().equals("admin")) {
+        if (currentlyLoggedUser != null) {
+            if (currentlyLoggedUser.getType().equals("admin")) {
                 try {
+                    loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
                     Stage stage = (Stage) meno.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
-                    stage.setTitle("ZooNote");
+                    root = loader.load();
 
+                    stage.setTitle("ZooNote");
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
@@ -68,43 +62,43 @@ public class loginController implements Initializable {
                 }
             }
 
-            if (curentlyLoggedUser.getType().equals("opravar")) {
-                    try {
-                        Stage stage = (Stage) prihlas.getScene().getWindow();
-                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Mechanic.fxml"));
-                        stage.setTitle("ZooNote");
+            if (currentlyLoggedUser.getType().equals("opravar")) {
+                try {
+                    loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Mechanic.fxml"));
+                    Stage stage = (Stage) prihlas.getScene().getWindow();
+                    root = loader.load();
 
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println(curentlyLoggedUser.getType());
-                    }
+                    stage.setTitle("ZooNote");
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                if (curentlyLoggedUser.getType().equals("osetrovatel")) {
-                    try {
-                        Stage stage = (Stage) meno.getScene().getWindow();
-                        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Attendant.fxml"));
-                        stage.setTitle("ZooNote");
+            }
+            if (currentlyLoggedUser.getType().equals("osetrovatel")) {
+                try {
+                    loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Attendant.fxml"));
+                    Stage stage = (Stage) meno.getScene().getWindow();
+                    root = loader.load();
+                    stage.setTitle("ZooNote");
 
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } else{
-                zle.setText("Zle užívateľské meno alebo heslo!");
-                meno.setText("");
-                heslo.setText("");
+            }
+        } else {
+            zle.setText("Zle užívateľské meno alebo heslo!");
+            meno.setText("");
+            heslo.setText("");
         }
     }
 
-
     @FXML
-    private void ZabudolPass(){
+    private void ZabudolPass() {
         try {
             Stage stage = (Stage) zabudolHeslo.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/ResetPass.fxml"));
@@ -118,10 +112,10 @@ public class loginController implements Initializable {
             System.out.println("Nepodarilo sa načítať reset hesla");
         }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
 }
 

@@ -27,7 +27,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-public class AddUserController implements Initializable {
+public class AddUserController extends contentController implements Initializable {
     ObservableList vyber= FXCollections.observableArrayList();
     @FXML
     private ChoiceBox<String> cb;
@@ -45,11 +45,11 @@ public class AddUserController implements Initializable {
     private TextField hesloField;
     @FXML
     private Label zle;
-    private contentController user;
 
     private String data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
+
         Stage stage = (Stage) menoField.getScene().getWindow();
         stage.close();
 
@@ -66,8 +66,10 @@ public class AddUserController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         Stage stage = (Stage) menoField.getScene().getWindow();
         stage.close();
+
 
 
     }
@@ -111,6 +113,5 @@ public class AddUserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoadData();
-        user=new contentController();
     }
 }

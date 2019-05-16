@@ -18,6 +18,8 @@ public class Repair {
         this.cena = new SimpleDoubleProperty(cena);
     }
 
+    public Repair(){}
+
     public String getNazov() {
         return nazov.get();
     }

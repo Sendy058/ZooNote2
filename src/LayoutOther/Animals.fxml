@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,11 +31,13 @@
       <Image url="@../image/minus.png" />
    </image>
 </ImageView>
-      <ImageView fx:id="zdravKartaBtn" fitHeight="48.0" fitWidth="54.0" layoutX="77.0" layoutY="12.0" onMouseClicked="#showAnimalInfo" pickOnBounds="true" preserveRatio="true" styleClass=".g">
+      <ImageView fx:id="zdravKartaBtn" fitHeight="48.0" fitWidth="54.0" layoutX="239.0" layoutY="13.0" onMouseClicked="#showAnimalInfo" pickOnBounds="true" preserveRatio="true" styleClass=".g">
          <image>
             <Image url="@../image/zdravotnaKartaIMG.png" />
          </image>
       </ImageView>
 <Label fx:id="errMessage" alignment="CENTER" layoutX="61.0" layoutY="540.0" prefHeight="17.0" prefWidth="691.0" textFill="RED" />
+      <Label fx:id="workaroundLabel" layoutX="372.0" layoutY="28.0" />
+      <TextField fx:id="searchField" layoutX="61.0" layoutY="25.0" styleClass="text" />
 </children>
         </fx:root>
