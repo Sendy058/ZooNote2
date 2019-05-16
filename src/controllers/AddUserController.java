@@ -27,7 +27,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-public class AddUserController implements Initializable {
+public class AddUserController extends contentController implements Initializable {
     ObservableList vyber= FXCollections.observableArrayList();
     @FXML
     private ChoiceBox<String> cb;
@@ -45,18 +45,14 @@ public class AddUserController implements Initializable {
     private TextField hesloField;
     @FXML
     private Label zle;
-    private contentController user;
 
     private String data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Users.fxml"));
-        try {
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
+        Stage stage = (Stage) menoField.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
         }
     public void getFromFields(){
         data[3] = menoField.getText();
@@ -79,10 +75,6 @@ public class AddUserController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();*/
-
-
-
-
 
     }
     private void register() throws SQLException {
@@ -125,6 +117,5 @@ public class AddUserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoadData();
-        user=new contentController();
     }
 }

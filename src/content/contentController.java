@@ -20,15 +20,14 @@ import java.util.ResourceBundle;
 public class contentController extends loginController implements Initializable {
 
     @FXML
-    BorderPane mainPane;
+    private BorderPane mainPane;
     @FXML
-    Label menoPriezvisko;
+    private Label menoPriezvisko;
 
     private Home home;
     private Finances finances;
     private Invoices invoices;
     private Repairs repairs;
-    private Users users;
 
     @FXML
     private Button homeBtn;
@@ -60,7 +59,6 @@ public class contentController extends loginController implements Initializable 
 
             }
         }
-
     }
 
     @FXML
@@ -136,8 +134,7 @@ public class contentController extends loginController implements Initializable 
 
     @FXML
     public void onUsersBtnClick() {
-        users = new Users();
-        mainPane.setCenter(users);
+        mainPane.setCenter(new Users());
         for (Button btn:Butons) {
             if (btn==kontaBtn) {
                 btn.setStyle("-fx-text-fill:black;" +

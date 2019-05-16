@@ -94,7 +94,7 @@ public class HomeControler extends loginController implements Initializable {
             }
         }
 
-        money = String.valueOf(acc.getStav());
+        money = String.valueOf(Math.round(acc.getStav()));
 
         balance.setText(money + "€");
         initClock();

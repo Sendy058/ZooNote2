@@ -9,8 +9,12 @@ import javafx.stage.Stage;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class AddAnimalController {
 
@@ -52,17 +56,24 @@ public class AddAnimalController {
             errMessage.setText("Všetky polia sú povinné!");
 
         }else {
-            Connection connection = ConnectionClass.getConnection();
-            String insertQuery = "INSERT INTO zviera(meno,datum_narodenia,stav,zdravotna_karta,trieda,celad,rad,druh) VALUES(?,?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatementforInsert = connection.prepareStatement(insertQuery);
-            for (int i = 0;i<8;i++){
-                preparedStatementforInsert.setString(i+1,data[i]);
-            }
-            preparedStatementforInsert.executeUpdate();
-            connection.close();
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                dateFormat.parse(data[1]);
 
-            Stage stage = (Stage) menoField.getScene().getWindow();
-            stage.close();
+                Connection connection = ConnectionClass.getConnection();
+                String insertQuery = "INSERT INTO zviera(meno,datum_narodenia,stav,zdravotna_karta,trieda,celad,rad,druh) VALUES(?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStatementforInsert = connection.prepareStatement(insertQuery);
+                for (int i = 0; i < 8; i++) {
+                    preparedStatementforInsert.setString(i + 1, data[i]);
+                }
+                preparedStatementforInsert.executeUpdate();
+                connection.close();
+
+                Stage stage = (Stage) menoField.getScene().getWindow();
+                stage.close();
+            } catch (ParseException e) {
+                errMessage.setText("Zadali ste zlý dátum!");
+            }
         }
     }
 

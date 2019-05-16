@@ -76,16 +76,20 @@ public class RepairsController extends loginController implements Initializable 
         showInfoBtn.setVisible(false);
 
         dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
             if(selectedItem.getStav().equals("Potvrdené")) {
-                setRepairStav("Zamietnuté");
                 plusBankovyUcet(selectedItem.getCena());
             }
+
+            setRepairStav("Zamietnuté");
         });
         approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
             if (selectedItem.getStav().equals("Zamietnuté")) {
                 minusBankovyUcet(selectedItem.getCena());
-                setRepairStav("Potvrdené");
             }
+
+            setRepairStav("Potvrdené");
         });
     }
     @FXML
@@ -235,16 +239,36 @@ public class RepairsController extends loginController implements Initializable 
         }
     }
 
-    private void minusBankovyUcet(Double cena){
-        Connection connection = ConnectionClass.getConnection();
-        String sqlMinus = "UPDATE bankovy_ucet SET ";
+    private void minusBankovyUcet(Double cena)  {
+        try {
+            Connection connection = ConnectionClass.getConnection();
+            String sqlMinus = "UPDATE bankovy_ucet SET stav = stav - ?";
+            PreparedStatement preparedStatementForMinus = connection.prepareStatement(sqlMinus);
+            preparedStatementForMinus.setDouble(1, cena);
+            preparedStatementForMinus.executeUpdate();
+
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
         System.out.println("-"+cena);
     }
 
     private void plusBankovyUcet(Double cena){
+        try {
+            Connection connection = ConnectionClass.getConnection();
+            String sqlPlus = "UPDATE bankovy_ucet SET stav = stav + ?";
+            PreparedStatement preparedStatementForPlus = connection.prepareStatement(sqlPlus);
+            preparedStatementForPlus.setDouble(1, cena);
+            preparedStatementForPlus.executeUpdate();
+
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
         System.out.println("+"+cena);
     }
-
 
 }
