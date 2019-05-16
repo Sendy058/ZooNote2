@@ -64,6 +64,16 @@ public class BankAccount {
     }
 
     public void Uber(double x){
+        try {
+            nacitaj();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         stav=stav-x;
+        try {
+            update();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

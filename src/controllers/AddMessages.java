@@ -90,7 +90,7 @@ public class AddMessages extends loginController implements Initializable {
             System.out.println(data[3]);
     System.out.println(data[0]);
             if(data[0].equals("2")) {
-            data[3]="0";
+            data[3]=null;
     }
 
          if(data[3].isEmpty()||data[2].isEmpty()||data[1].isEmpty()){
@@ -101,12 +101,12 @@ public class AddMessages extends loginController implements Initializable {
         }
 
         else {
-            if (data[3]!=null&&prijemcaBox.getValue().equals("Vklad")||typBox.getValue().equals("Platba")){
+            if (data[3]!=null&&prijemcaBox.getValue().equals("Vklad")){
                 System.out.println("pridam");
                 bank.Pridaj(Double.parseDouble(data[3]));
 
             }
-             if (data[3]!=null&&prijemcaBox.getValue().equals("Úbytok")||typBox.getValue().equals("Platba")){
+             if (data[3]!=null&&prijemcaBox.getValue().equals("Úbytok")||data[3]!=null &&typBox.getValue().equals("Platba")){
                  bank.Uber(Double.parseDouble(data[3]));
              }
             for (int i = 0; i < 7; i++) {
@@ -145,7 +145,10 @@ public class AddMessages extends loginController implements Initializable {
                 prijemcaBox.getSelectionModel().selectFirst();
                 changeText.setText("OPERÁCIA:");
             }
-
+            if (curentlyLoggedUser.getType().equals("osetrovatel")) {
+                prijemcaBox.setVisible(false);
+                changeText.setVisible(false);
+            }
 
         }
         else {
@@ -157,7 +160,10 @@ public class AddMessages extends loginController implements Initializable {
                 prijemcaBox.getSelectionModel().selectFirst();
                 changeText.setText("PRÍJEMCA:");
             }
-
+            if (curentlyLoggedUser.getType().equals("osetrovatel")) {
+                prijemcaBox.setVisible(true);
+                changeText.setVisible(true);
+            }
         }
     }
     @Override
@@ -196,6 +202,9 @@ public class AddMessages extends loginController implements Initializable {
                 vyberPrijemca.addAll(a1, b1);
                 prijemcaBox.getItems().addAll(vyberPrijemca);
                 prijemcaBox.getSelectionModel().selectFirst();
+                prijemcaBox.setVisible(false);
+                changeText.setVisible(false);
+
 
 
             }
