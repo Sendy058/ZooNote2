@@ -2,12 +2,15 @@ package controllers;
 
 
 import connectivity.ConnectionClass;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -46,5 +49,6 @@ public class AddRepairController {
             Stage stage = (Stage) nazovField.getScene().getWindow();
             stage.close();
         }
+
     }
 }

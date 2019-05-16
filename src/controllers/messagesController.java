@@ -104,9 +104,9 @@ public class messagesController extends loginController implements Initializable
             String stavString = "";
             String typ = "";
 
-                    switch (currentlyLoggedUser.getType()) {
-                        case "admin":
-                    primatel=1;
+            switch (currentlyLoggedUser.getType()) {
+                case "admin":
+                    primatel = 1;
 
                     break;
                 case "osetrovatel":
@@ -117,7 +117,7 @@ public class messagesController extends loginController implements Initializable
                     primatel = 3;
 
                     break;
-                    }
+            }
             int p = resultSetSize.getInt(1);
 
 
@@ -125,10 +125,10 @@ public class messagesController extends loginController implements Initializable
                 for (int i = 0; i < p; i++) {
 
 
-    zisti(data.getInt(7));
-                    System.out.println(data.getInt(6)+","+primatel);
-                    System.out.println(odosielatelString+","+currentlyLoggedUser.getType());
-                    if (data.getInt(6) == primatel|| odosielatelString.equals(currentlyLoggedUser.getType()) ) {
+                    zisti(data.getInt(7));
+                    System.out.println(data.getInt(6) + "," + primatel);
+                    System.out.println(odosielatelString + "," + currentlyLoggedUser.getType());
+                    if (data.getInt(6) == primatel || odosielatelString.equals(currentlyLoggedUser.getType())) {
 
                         switch (data.getInt(2)) {
                             case 1:
@@ -162,35 +162,33 @@ public class messagesController extends loginController implements Initializable
     }
 
 
-
-    public String zisti(int id)throws SQLException{
-        String S="";
+    public String zisti(int id) throws SQLException {
+        String S = "";
         String sql = "SELECT typ_konta  from pouzivatel WHERE id_pouzivatel=?";
         Connection connection = ConnectionClass.getConnection();
 
         PreparedStatement statementForKonto = connection.prepareStatement(sql);
-        statementForKonto.setInt(1,id );
+        statementForKonto.setInt(1, id);
         ResultSet Konto = statementForKonto.executeQuery();
         Konto.next();
 
         switch (Konto.getString(1)) {
             case "admin":
-                S= "Admin";
+                S = "Admin";
                 break;
             case "osetrovatel":
-                S= "Ošetrovateľ";
+                S = "Ošetrovateľ";
                 break;
             case "opravar":
-                S= "Opravár";
+                S = "Opravár";
                 break;
 
         }
-        odosielatelString=Konto.getString(1);
+        odosielatelString = Konto.getString(1);
         connection.close();
 
         return S;
     }
-
 
 
     public void plusMss() throws IOException {
@@ -205,7 +203,7 @@ public class messagesController extends loginController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    dataInport();
+        dataInport();
 
     }
 
@@ -216,12 +214,12 @@ public class messagesController extends loginController implements Initializable
         Connection connection = ConnectionClass.getConnection();
 
         PreparedStatement statementForKonto = connection.prepareStatement(sql);
-        statementForKonto.setString(1,currentlyLoggedUser.getUsername() );
+        statementForKonto.setString(1, currentlyLoggedUser.getUsername());
         ResultSet Konto = statementForKonto.executeQuery();
         Konto.next();
 
         if (!Konto.isClosed() || !Konto.isClosed()) {
-            typKonta=Konto.getInt(1);
+            typKonta = Konto.getInt(1);
 
             connection.close();
 

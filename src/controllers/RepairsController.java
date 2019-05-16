@@ -88,7 +88,7 @@ public class RepairsController extends loginController implements Initializable 
             }
         });
     }
-
+    @FXML
     private void insertIntoTable(String filter) throws SQLException {
         Connection connection = ConnectionClass.getConnection();
         PreparedStatement selectRepairs, selectCount;
@@ -237,7 +237,7 @@ public class RepairsController extends loginController implements Initializable 
 
     private void minusBankovyUcet(Double cena){
         Connection connection = ConnectionClass.getConnection();
-        String sqlMinus = "UPDATE bankovy_ucet SET "
+        String sqlMinus = "UPDATE bankovy_ucet SET ";
 
         System.out.println("-"+cena);
     }
@@ -245,5 +245,6 @@ public class RepairsController extends loginController implements Initializable 
     private void plusBankovyUcet(Double cena){
         System.out.println("+"+cena);
     }
+
 
 }
