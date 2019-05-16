@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AnimalInfoController implements Initializable {
+public class AnimalInfoController extends loginController implements Initializable {
     @FXML
     private Label menoLabel;
     @FXML
@@ -53,7 +53,7 @@ public class AnimalInfoController implements Initializable {
 
     }
     public void changeLabels(){
-        if (loginController.curentlyLoggedUser.getType().equals("osetrovatel")) {
+        if (curentlyLoggedUser.getType().equals("osetrovatel")) {
 
             stavLabel.setVisible(false);
             stavField.setVisible(true);
@@ -64,7 +64,7 @@ public class AnimalInfoController implements Initializable {
     }
 
     public void updateAnimal() throws SQLException {
-        if (loginController.curentlyLoggedUser.getType().equals("osetrovatel")) {
+        if (curentlyLoggedUser.getType().equals("osetrovatel")) {
             Connection connection = ConnectionClass.getConnection();
             String updateQuery = "UPDATE zviera SET stav = ?,zdravotna_karta = ? WHERE meno = ?";
             PreparedStatement preparedStatementForUpdate = connection.prepareStatement(updateQuery);

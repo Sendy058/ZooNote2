@@ -24,7 +24,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AnimalsController implements Initializable {
+public class AnimalsController extends loginController implements Initializable {
     private ResultSet data, resultSetSize;
     private Animal animalArray[];
     private String lastSelectedName = "", selectedName = "";
@@ -129,12 +129,12 @@ public class AnimalsController implements Initializable {
     }
 
     private void setVisible(boolean bool) {
-        if (loginController.curentlyLoggedUser.getType().equals("admin")) {
+        if (curentlyLoggedUser.getType().equals("admin")) {
             deleteBtn.setVisible(false);
             addBtn.setVisible(false);
             zdravKartaBtn.setVisible(bool);
 
-        } else if (loginController.curentlyLoggedUser.getType().equals("osetrovatel")) {
+        } else if (curentlyLoggedUser.getType().equals("osetrovatel")) {
             deleteBtn.setVisible(bool);
             zdravKartaBtn.setVisible(bool);
         }

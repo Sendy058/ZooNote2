@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HomeControler implements Initializable {
+public class HomeControler extends loginController implements Initializable {
 
     private ResultSet date, resultSetSize;
     @FXML
@@ -58,7 +58,7 @@ public class HomeControler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (!loginController.curentlyLoggedUser.getType().equals("admin")) {
+        if (!curentlyLoggedUser.getType().equals("admin")) {
             balance.setVisible(false);
             balanceText.setVisible(false);
             balanceLine.setVisible(false);
@@ -71,6 +71,7 @@ public class HomeControler implements Initializable {
         try {
             statement = connection.prepareStatement(sql);
             ResultSet setOfData = statement.executeQuery();
+
 
             acc = new BankAccount();
             acc.setStav(setOfData.getDouble("stav"));

@@ -39,7 +39,7 @@ public class loginController implements Initializable {
     public static String nameSurname;
 
 
-    public static User curentlyLoggedUser;
+     protected static User curentlyLoggedUser;
 
 
 

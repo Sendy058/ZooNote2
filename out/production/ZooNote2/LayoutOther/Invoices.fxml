@@ -2,20 +2,35 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+
 
 <fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
    <children>
-      <TableView fx:id="messagesTable" layoutX="76.0" layoutY="91.0" onMouseClicked="#showFromTable" prefHeight="392.0" prefWidth="686.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
+      <TableView fx:id="messagesTable" layoutX="77.0" layoutY="124.0" prefHeight="392.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
          <columns>
-            <TableColumn fx:id="nazovColumn" prefWidth="160.800048828125" resizable="false" text="PREDMET" />
-            <TableColumn fx:id="typColumn" minWidth="0.0" prefWidth="185.6000518798828" resizable="false" text="TYP" />
-            <TableColumn fx:id="odosielatelColumn" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
-            <TableColumn fx:id="datumColumn" prefWidth="130.39996337890625" text="DÁTUM" />
-            <TableColumn fx:id="stavColumn1" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
-            <TableColumn fx:id="stavColumn11" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
-            <TableColumn fx:id="odosColu" minWidth="0.0" prefWidth="207.20001220703125" resizable="false" text="ODOSIELAŤEL" />
+            <TableColumn fx:id="nazovColumn" prefWidth="167.20001220703125" resizable="false" text="PREDMET" />
+            <TableColumn fx:id="typColumn" prefWidth="169.5999755859375" resizable="false" text="TYP" />
+            <TableColumn fx:id="odosielatelColumn" minWidth="0.0" prefWidth="178.39996337890625" resizable="false" text="ODOSIELATEL" />
+            <TableColumn fx:id="datumColumn" prefWidth="167.199951171875" resizable="false" text="DATUM" />
          </columns>
       </TableView>
+      <ImageView fx:id="plusMssBtn" fitHeight="60.0" fitWidth="64.0" layoutX="699.0" layoutY="39.0" onMouseClicked="#plusMss" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/plus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="51.0" layoutX="640.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/minus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="574.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/zdravotnaKartaIMG.png" />
+         </image>
+      </ImageView>
    </children>
 </fx:root>

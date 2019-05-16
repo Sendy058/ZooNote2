@@ -27,7 +27,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RepairsController implements Initializable {
+public class RepairsController extends loginController implements Initializable {
 
     @FXML
     private ChoiceBox filterBox = new ChoiceBox();
@@ -71,7 +71,7 @@ public class RepairsController implements Initializable {
             }
         });
 
-        if (loginController.curentlyLoggedUser.getType().equals("opravar")) {
+        if (curentlyLoggedUser.getType().equals("opravar")) {
             addRepairBtn.setVisible(true);
         } else addRepairBtn.setVisible(false);
 
@@ -167,12 +167,12 @@ public class RepairsController implements Initializable {
     }
 
     private void setVisible(boolean bool) {
-        if (loginController.curentlyLoggedUser.getType().equals("admin")) {
+        if (curentlyLoggedUser.getType().equals("admin")) {
             dismissBtn.setVisible(bool);
             approveBtn.setVisible(bool);
             showInfoBtn.setVisible(bool);
 
-        } else if (loginController.curentlyLoggedUser.getType().equals("opravar")) {
+        } else if (curentlyLoggedUser.getType().equals("opravar")) {
             dismissBtn.setVisible(false);
             approveBtn.setVisible(false);
             showInfoBtn.setVisible(bool);
@@ -182,6 +182,14 @@ public class RepairsController implements Initializable {
     public void showAddRepair() throws IOException {
         Stage stage = new Stage();
         Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddRepair.fxml"));
+        stage.setTitle("Pridanie Opravy");
+        stage.setScene(new Scene(root2, 400, 600));
+        stage.show();
+    }
+
+    public void showRepairInfo() throws IOException {
+        Stage stage = new Stage();
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
         stage.setTitle("Pridanie Opravy");
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();

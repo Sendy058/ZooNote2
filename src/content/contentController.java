@@ -60,22 +60,6 @@ public class contentController extends loginController implements Initializable 
   */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(pomocna==1) {
-            menoPriezvisko.setText(nameSurname);
-            users = new Users();
-            mainPane.setCenter(users);
-            Butons.addAll(homeBtn,financeBtn,zvierataBtn,spraviBtn,opraviBtn,kontaBtn);
-            for (Button btn:Butons) {
-                if (btn==spraviBtn) {
-                    btn.setStyle("-fx-text-fill:black;" +
-                            "-fx-background-color: #80906c;");
-                }
-                else{
-                    btn.setStyle("-fx-text-fill:white;" +
-                            "-fx-background-color: #80906c;"); }
-            }
-        }
-        else {
             menoPriezvisko.setText(nameSurname);
             home = new Home();
             mainPane.setCenter(home);
@@ -87,7 +71,7 @@ public class contentController extends loginController implements Initializable 
                 } else {
                     btn.setStyle("-fx-text-fill:white;" +
                             "-fx-background-color: #80906c;");
-                }
+
             }
         }
 
