@@ -49,6 +49,7 @@ public class AddMessages extends loginController implements Initializable {
     @FXML
     private Label label;
     private int odosielatel;
+    private int pomoc=0;
     private String [] data = new String [7];
     private BankAccount bank;
 
@@ -90,45 +91,67 @@ public class AddMessages extends loginController implements Initializable {
             System.out.println(data[3]);
     System.out.println(data[0]);
             if(data[0].equals("2")) {
-            data[3]=null;
+            data[3]="0";
+            cenaFile.setText("0");
+
     }
 
-         if(data[3].isEmpty()||data[2].isEmpty()||data[1].isEmpty()){
+
+
+
+          if (data[3].isEmpty()||data[2].isEmpty()||data[1].isEmpty()){
             label.setVisible(true);
             System.out.println("opa");
-
-
         }
 
-        else {
-            if (data[3]!=null&&prijemcaBox.getValue().equals("Vklad")){
-                System.out.println("pridam");
-                bank.Pridaj(Double.parseDouble(data[3]));
+    else {
+            try {
+                System.out.println(data[3]);
 
-            }
-             if (data[3]!=null&&prijemcaBox.getValue().equals("Úbytok")||data[3]!=null &&typBox.getValue().equals("Platba")){
-                 bank.Uber(Double.parseDouble(data[3]));
-             }
-            for (int i = 0; i < 7; i++) {
-                System.out.println(data[i]);
-            }
-            Connection connection = ConnectionClass.getConnection();
-            String insertQuery = "INSERT INTO sprava(typ_spravy,nazov_spravy,obsah,cena,prijemca,odosielatel,datum_odoslania) VALUES(?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatementInsert = connection.prepareStatement(insertQuery);
-            for (int i = 0; i < 7; i++) {
-                if(i==0||i==4||i==5){
-                    preparedStatementInsert.setInt(i + 1, Integer.parseInt(data[i]));
+                    Double.parseDouble(cenaFile.getText());
+
+
+
+                if (prijemcaBox.getValue().equals("Vklad")) {
+
+                    bank.Pridaj(Double.parseDouble(data[3]));
+
                 }
-                else if(i==3)
-                    preparedStatementInsert.setDouble(i + 1, Double.parseDouble(data[i]));
-                else
-                preparedStatementInsert.setString(i + 1, data[i]);
-            }
-            preparedStatementInsert.executeUpdate();
-            connection.close();
+                if (prijemcaBox.getValue().equals("Úbytok") || pomoc == 1) {
+                    String nCena = "";
+                    nCena = nCena + "-" + data[3];
+                    data[3] = nCena;
+                    bank.Pridaj(Double.parseDouble(data[3]));
+                }
 
-            Stage stage = (Stage) nazovFile.getScene().getWindow();
-            stage.close();
+                for (int i = 0; i < 7; i++) {
+                    System.out.println(data[i]);
+                }
+                Connection connection = ConnectionClass.getConnection();
+                String insertQuery = "INSERT INTO sprava(typ_spravy,nazov_spravy,obsah,cena,prijemca,odosielatel,datum_odoslania) VALUES(?,?,?,?,?,?,?)";
+                PreparedStatement preparedStatementInsert = connection.prepareStatement(insertQuery);
+                for (int i = 0; i < 7; i++) {
+                    if (i == 0 || i == 4 || i == 5) {
+                        preparedStatementInsert.setInt(i + 1, Integer.parseInt(data[i]));
+                    } else if (i == 3) {
+                        if (data[3].equals("x")) {
+                            data[3] = "0";
+                        }
+                        preparedStatementInsert.setDouble(i + 1, Double.parseDouble(data[i]));
+                    } else {
+
+                        preparedStatementInsert.setString(i + 1, data[i]);
+                    }
+                }
+                preparedStatementInsert.executeUpdate();
+                connection.close();
+
+                Stage stage = (Stage) nazovFile.getScene().getWindow();
+                stage.close();
+            } catch (NumberFormatException e) {
+                label.setText("Nezadali ste správnu sumu");
+                label.setVisible(true);
+            }
         }
 
 
@@ -148,6 +171,7 @@ public class AddMessages extends loginController implements Initializable {
             if (currentlyLoggedUser.getType().equals("osetrovatel")) {
                 prijemcaBox.setVisible(false);
                 changeText.setVisible(false);
+                pomoc=1;
             }
 
         }
@@ -163,6 +187,7 @@ public class AddMessages extends loginController implements Initializable {
             if (currentlyLoggedUser.getType().equals("osetrovatel")) {
                 prijemcaBox.setVisible(true);
                 changeText.setVisible(true);
+                pomoc=0;
             }
         }
     }
@@ -195,6 +220,7 @@ public class AddMessages extends loginController implements Initializable {
                 vyberPrijemca.addAll(b1, c1);
                 prijemcaBox.getItems().addAll(vyberOperacia);
                 prijemcaBox.getSelectionModel().selectFirst();
+                changeText.setText("OPERÁCIA:");
 
             }
                 break;
@@ -204,6 +230,7 @@ public class AddMessages extends loginController implements Initializable {
                 prijemcaBox.getSelectionModel().selectFirst();
                 prijemcaBox.setVisible(false);
                 changeText.setVisible(false);
+                pomoc=1;
 
 
 

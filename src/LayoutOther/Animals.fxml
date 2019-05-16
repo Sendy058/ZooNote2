@@ -17,8 +17,8 @@
       <TableColumn fx:id="dateColumn" prefWidth="177.0" resizable="false" text="DATUM NARODENIA" />
       <TableColumn fx:id="stavColumn" minWidth="0.0" prefWidth="97.0" resizable="false" text="STAV" />
       <TableColumn fx:id="triedaColumn" prefWidth="113.0" resizable="false" text="TRIEDA" />
-      <TableColumn fx:id="celadColumn" minWidth="0.0" prefWidth="101.0" resizable="false" text="ČEĽAĎ" />
-            <TableColumn fx:id="radColumn" minWidth="0.0" prefWidth="107.0" resizable="false" text="RAD" />
+      <TableColumn fx:id="celadColumn" minWidth="0.0" prefWidth="108.79998779296875" resizable="false" text="ČEĽAĎ" />
+            <TableColumn fx:id="radColumn" minWidth="0.0" prefWidth="100.0" resizable="false" text="RAD" />
    </columns>
 </TableView>
 <ImageView fx:id="addBtn" fitHeight="55.0" fitWidth="55.0" layoutX="693.0" layoutY="8.0" onMouseClicked="#showAddAnimal" pickOnBounds="true" preserveRatio="true" styleClass=".g">
@@ -39,5 +39,10 @@
 <Label fx:id="errMessage" alignment="CENTER" layoutX="61.0" layoutY="540.0" prefHeight="17.0" prefWidth="691.0" textFill="RED" />
       <Label fx:id="workaroundLabel" layoutX="372.0" layoutY="28.0" />
       <TextField fx:id="searchField" layoutX="61.0" layoutY="25.0" styleClass="text" />
+      <ImageView fitHeight="62.0" fitWidth="48.0" layoutX="704.0" layoutY="481.0" onMouseClicked="#refreshTable" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/updateBtnImg.png" />
+         </image>
+      </ImageView>
 </children>
         </fx:root>

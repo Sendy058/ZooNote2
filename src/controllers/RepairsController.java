@@ -77,7 +77,7 @@ public class RepairsController extends loginController implements Initializable 
 
         dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            if(selectedItem.getStav().equals("Potvrdené")) {
+            if (selectedItem.getStav().equals("Potvrdené")) {
                 plusBankovyUcet(selectedItem.getCena());
             }
 
@@ -92,6 +92,7 @@ public class RepairsController extends loginController implements Initializable 
             setRepairStav("Potvrdené");
         });
     }
+
     @FXML
     private void insertIntoTable(String filter) throws SQLException {
         Connection connection = ConnectionClass.getConnection();
@@ -194,7 +195,6 @@ public class RepairsController extends loginController implements Initializable 
     }
 
 
-
     public void showRepairInfo() throws IOException {
         FXMLLoader Loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
         Parent root2 = Loader.load();
@@ -239,7 +239,12 @@ public class RepairsController extends loginController implements Initializable 
         }
     }
 
-    private void minusBankovyUcet(Double cena)  {
+    public void refreshTable() throws SQLException {
+        filterBox.getSelectionModel().selectLast();
+        insertIntoTable("4");
+    }
+
+    private void minusBankovyUcet(Double cena) {
         try {
             Connection connection = ConnectionClass.getConnection();
             String sqlMinus = "UPDATE bankovy_ucet SET stav = stav - ?";
@@ -248,14 +253,14 @@ public class RepairsController extends loginController implements Initializable 
             preparedStatementForMinus.executeUpdate();
 
             connection.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println("-"+cena);
+        System.out.println("-" + cena);
     }
 
-    private void plusBankovyUcet(Double cena){
+    private void plusBankovyUcet(Double cena) {
         try {
             Connection connection = ConnectionClass.getConnection();
             String sqlPlus = "UPDATE bankovy_ucet SET stav = stav + ?";
@@ -264,11 +269,11 @@ public class RepairsController extends loginController implements Initializable 
             preparedStatementForPlus.executeUpdate();
 
             connection.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println("+"+cena);
+        System.out.println("+" + cena);
     }
 
 }

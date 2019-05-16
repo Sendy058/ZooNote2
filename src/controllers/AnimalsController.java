@@ -193,5 +193,11 @@ public class AnimalsController extends loginController implements Initializable 
         stage.show();
     }
 
+    public void refreshTable() {
+        searchField.clear();
+        insertIntoTable("");
+        animalsTable.refresh();
+    }
+
 
 }

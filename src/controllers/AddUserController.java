@@ -49,10 +49,10 @@ public class AddUserController extends contentController implements Initializabl
     private String data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
+
         Stage stage = (Stage) menoField.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        stage.close();
+
         }
     public void getFromFields(){
         data[3] = menoField.getText();
@@ -66,15 +66,11 @@ public class AddUserController extends contentController implements Initializabl
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //Stage stage = (Stage) menoField.getScene().getWindow();
-       // stage.close();
-        /*Stage stage = (Stage) menoField.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
-        stage.setTitle("Pridanie Pouzivatela");
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
+        Stage stage = (Stage) menoField.getScene().getWindow();
+        stage.close();
+
+
 
     }
     private void register() throws SQLException {

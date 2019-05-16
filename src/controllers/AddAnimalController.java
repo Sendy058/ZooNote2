@@ -57,7 +57,7 @@ public class AddAnimalController {
 
         }else {
             try {
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
                 dateFormat.parse(data[1]);
 
                 Connection connection = ConnectionClass.getConnection();
