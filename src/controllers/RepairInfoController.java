@@ -15,8 +15,10 @@ public class RepairInfoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cenaLabel.setText(Double.toString(RepairsController.selectedItem.getCena()));
-        predmetLabel.setText(RepairsController.selectedItem.getNazov());
-        popisLabel.setText(RepairsController.selectedItem.getPopis());
+    }
+    public void setText(Double cena, String nazov, String popis){
+        this.cenaLabel.setText(cena.toString());
+        this.predmetLabel.setText(nazov);
+        this.popisLabel.setText(popis);
     }
 }

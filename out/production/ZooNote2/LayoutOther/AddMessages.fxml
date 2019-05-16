@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddMessages">
+   <children>
+      <AnchorPane layoutX="2.0" layoutY="30.0" prefHeight="600.0" prefWidth="400.0">
+         <children>
+            <Line endX="174.0" layoutX="202.0" layoutY="67.0" startX="-175.0" />
+            <Label layoutX="37.0" layoutY="82.0" prefHeight="20.0" prefWidth="161.0" text="PREDMET:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="changeText" layoutX="37.0" layoutY="124.0" prefHeight="20.0" prefWidth="102.0" text="PRÍJEMCA:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Line endX="-14.0" endY="171.0" layoutX="210.0" layoutY="49.0" startX="-14.199981689453125" startY="18.599998474121094" />
+            <TextField fx:id="nazovFile" layoutX="214.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="PREDMET" />
+            <Label fx:id="typText" layoutX="37.0" layoutY="162.0" prefHeight="20.0" prefWidth="59.0" text="TYP:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="cenaText" layoutX="37.0" layoutY="205.0" prefHeight="20.0" prefWidth="59.0" text="SUMA:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="278.0" prefHeight="27.0" prefWidth="205.0" text="SPRÁVA:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="49.0" fitWidth="53.0" layoutX="172.0" layoutY="535.0" onMouseClicked="#addMss" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/checkMark.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="cenaFile" layoutX="214.0" layoutY="202.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="CENA" />
+            <TextArea fx:id="spravaFile" layoutX="26.0" layoutY="306.0" prefHeight="219.0" prefWidth="350.0" />
+            <Label fx:id="errMessage" alignment="CENTER" layoutX="78.0" layoutY="517.0" prefHeight="17.0" prefWidth="247.0" textFill="RED" />
+            <Label layoutX="127.0" layoutY="14.0" text="SPRÁVY">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="prijemcaBox" layoutX="214.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+            <ChoiceBox fx:id="typBox" layoutX="214.0" layoutY="159.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+            <Label fx:id="label" layoutX="19.0" layoutY="541.0" prefHeight="18.0" prefWidth="138.0" text="Vsetky polia su povinne" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

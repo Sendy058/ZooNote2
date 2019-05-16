@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HomeControler implements Initializable {
+public class HomeControler extends loginController implements Initializable {
 
     private ResultSet date, resultSetSize;
     @FXML
@@ -48,7 +48,6 @@ public class HomeControler implements Initializable {
     private Label nameDayTomorrow;
     @FXML
     private Line balanceLine;
-
     @FXML
     private Label balance, balanceText;
 
@@ -58,19 +57,20 @@ public class HomeControler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (!loginController.curentlyLoggedUser.getType().equals("admin")) {
-            balance.setVisible(false);
-            balanceText.setVisible(false);
+        if (!currentlyLoggedUser.getType().equals("admin")) {
             balanceLine.setVisible(false);
+            balanceText.setVisible(false);
+            balance.setVisible(false);
         }
 
-
         Connection connection = ConnectionClass.getConnection();
+
         String sql = "SELECT stav FROM bankovy_ucet WHERE id IS 1";
 
         try {
             statement = connection.prepareStatement(sql);
             ResultSet setOfData = statement.executeQuery();
+
 
             acc = new BankAccount();
             acc.setStav(setOfData.getDouble("stav"));
@@ -94,8 +94,7 @@ public class HomeControler implements Initializable {
             }
         }
 
-        System.out.println(acc.getStav());
-        money = String.valueOf(acc.getStav());
+        money = String.valueOf(Math.round(acc.getStav()));
 
         balance.setText(money + "€");
         initClock();
@@ -108,7 +107,6 @@ public class HomeControler implements Initializable {
 
         Weather pocasie = new Weather();
         teplota.setText((pocasie.getTemp()) + " °C");
-        System.out.println(pocasie.getDesc());
         Image img1 = new Image("image/pocasie1.png");
         Image img2 = new Image("image/pocasie2.png");
         Image img3 = new Image("image/pocasie3.png");
@@ -189,7 +187,6 @@ public class HomeControler implements Initializable {
     }
 
     private void initClock() {
-
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             cas.setText(LocalDateTime.now().format(formatter));
@@ -273,12 +270,10 @@ public class HomeControler implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         if (menoToday.length() == 0) menoToday = " ------";
         if (menoTomorrow.length() == 0) menoTomorrow = " ------";
         nameDay.setText(menoToday.substring(1));
         nameDayTomorrow.setText(menoTomorrow.substring(1));
-
-
     }
+
 }

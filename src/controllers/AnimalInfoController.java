@@ -1,20 +1,23 @@
 package controllers;
 
+import Entities.User;
 import connectivity.ConnectionClass;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import javax.jnlp.UnavailableServiceException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AnimalInfoController implements Initializable {
+public class AnimalInfoController extends loginController implements Initializable {
     @FXML
     private Label menoLabel;
     @FXML
@@ -35,25 +38,30 @@ public class AnimalInfoController implements Initializable {
     private TextField stavField;
     @FXML
     private TextArea zdravotnaKartaArea;
+    private User user;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        zdravotnaKartaArea.setText(AnimalsController.selectedItem.getZdravotna_karta());
-        stavField.setText(AnimalsController.selectedItem.getStav());
         stavField.setVisible(false);
         zdravotnaKartaArea.setVisible(false);
+    }
 
-        menoLabel.setText(AnimalsController.selectedItem.getMeno());
-        datumNarodeniaLabel.setText(AnimalsController.selectedItem.getDatum_narodenia());
-        stavLabel.setText(AnimalsController.selectedItem.getStav());
-        celadLabel.setText(AnimalsController.selectedItem.getCelad());
-        radLabel.setText(AnimalsController.selectedItem.getRad());
-        triedaLabel.setText(AnimalsController.selectedItem.getTrieda());
-        druhLabel.setText(AnimalsController.selectedItem.getDruh());
-        zdravotnaKartaLabel.setText(AnimalsController.selectedItem.getZdravotna_karta());
+    public void setText(String zdravotnaKarta, String stav, String meno, String datumNarodenia, String celad, String rad, String trieda, String druh) {
+        zdravotnaKartaArea.setText(zdravotnaKarta);
+        stavField.setText(stav);
 
+        menoLabel.setText(meno);
+        datumNarodeniaLabel.setText(datumNarodenia);
+        stavLabel.setText(stav);
+        celadLabel.setText(celad);
+        radLabel.setText(rad);
+        triedaLabel.setText(trieda);
+        druhLabel.setText(druh);
+        zdravotnaKartaLabel.setText(zdravotnaKarta);
     }
     public void changeLabels(){
-        if (loginController.curentlyLoggedUser.getType().equals("osetrovatel")) {
+        if (currentlyLoggedUser.getType().equals("osetrovatel")) {
 
             stavLabel.setVisible(false);
             stavField.setVisible(true);
@@ -64,7 +72,7 @@ public class AnimalInfoController implements Initializable {
     }
 
     public void updateAnimal() throws SQLException {
-        if (loginController.curentlyLoggedUser.getType().equals("osetrovatel")) {
+        if (currentlyLoggedUser.getType().equals("osetrovatel")) {
             Connection connection = ConnectionClass.getConnection();
             String updateQuery = "UPDATE zviera SET stav = ?,zdravotna_karta = ? WHERE meno = ?";
             PreparedStatement preparedStatementForUpdate = connection.prepareStatement(updateQuery);

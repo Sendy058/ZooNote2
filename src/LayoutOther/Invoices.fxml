@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
    <children>
-      <Label alignment="CENTER" layoutX="115.0" layoutY="92.0" prefHeight="17.0" prefWidth="71.0" text="INVOICES" />
+      <TableView fx:id="messagesTable" layoutX="77.0" layoutY="124.0" prefHeight="392.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
+         <columns>
+            <TableColumn fx:id="nazovColumn" prefWidth="167.20001220703125" resizable="false" text="PREDMET" />
+            <TableColumn fx:id="typColumn" prefWidth="169.5999755859375" resizable="false" text="TYP" />
+            <TableColumn fx:id="odosielatelColumn" minWidth="0.0" prefWidth="178.39996337890625" resizable="false" text="ODOSIELATEL" />
+            <TableColumn fx:id="datumColumn" prefWidth="167.199951171875" resizable="false" text="DATUM" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="plusMssBtn" fitHeight="60.0" fitWidth="64.0" layoutX="699.0" layoutY="39.0" onMouseClicked="#plusMss" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/plus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="51.0" layoutX="640.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/minus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="574.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/zdravotnaKartaIMG.png" />
+         </image>
+      </ImageView>
    </children>
 </fx:root>

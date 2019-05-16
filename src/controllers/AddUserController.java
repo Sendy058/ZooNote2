@@ -1,6 +1,7 @@
 package controllers;
 
 import connectivity.ConnectionClass;
+import content.contentController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,8 +13,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.Encryption;
+import Entities.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +26,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-public class AddUserController implements Initializable {
+public class AddUserController extends contentController implements Initializable {
     ObservableList vyber= FXCollections.observableArrayList();
     @FXML
     private ChoiceBox<String> cb;
@@ -45,14 +48,11 @@ public class AddUserController implements Initializable {
     private String data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
-        Stage stage = (Stage) zaregistruj.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/Admin.fxml"));
-        stage.setTitle("Admin");
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Stage stage = (Stage) menoField.getScene().getWindow();
+        stage.setScene(new Scene(root));
         stage.show();
-    }
+        }
     public void getFromFields(){
         data[3] = menoField.getText();
         data[4] = priezviskoField.getText();
@@ -65,6 +65,16 @@ public class AddUserController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //Stage stage = (Stage) menoField.getScene().getWindow();
+       // stage.close();
+        /*Stage stage = (Stage) menoField.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
+        stage.setTitle("Pridanie Pouzivatela");
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();*/
+
     }
     private void register() throws SQLException {
         Connection connection = ConnectionClass.getConnection();

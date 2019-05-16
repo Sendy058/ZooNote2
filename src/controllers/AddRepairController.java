@@ -2,12 +2,15 @@ package controllers;
 
 
 import connectivity.ConnectionClass;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -23,8 +26,8 @@ public class AddRepairController {
     public void addRepair() throws SQLException {
 
         data[0] = nazovField.getText();
-        data[1] = cenaField.getText();
         data[2] = popisField.getText();
+        data[1] = cenaField.getText();
 
 
         if (data[0].isEmpty() || data[1].isEmpty() || data[2].isEmpty()){
@@ -32,19 +35,27 @@ public class AddRepairController {
             errMessage.setText("Vsetky polia sú povinné!");
 
         }else {
-            Connection connection = ConnectionClass.getConnection();
-            String insertQuery = "INSERT INTO opravy(nazov_opravy,popis_opravy,stav,cena) VALUES(?,?,?,?)";
-            PreparedStatement preparedStatementforInsert = connection.prepareStatement(insertQuery);
-            preparedStatementforInsert.setString(1,data[0]);
-            preparedStatementforInsert.setString(2,data[2]);
-            preparedStatementforInsert.setString(3,"0");
-            preparedStatementforInsert.setString(4,data[1]);
+            try {
+                Double.parseDouble(cenaField.getText());
 
-            preparedStatementforInsert.executeUpdate();
-            connection.close();
+                Connection connection = ConnectionClass.getConnection();
+                String insertQuery = "INSERT INTO opravy(nazov_opravy,popis_opravy,stav,cena) VALUES(?,?,?,?)";
+                PreparedStatement preparedStatementforInsert = connection.prepareStatement(insertQuery);
+                preparedStatementforInsert.setString(1,data[0]);
+                preparedStatementforInsert.setString(2,data[2]);
+                preparedStatementforInsert.setString(3,"0");
+                preparedStatementforInsert.setString(4,data[1]);
 
-            Stage stage = (Stage) nazovField.getScene().getWindow();
-            stage.close();
+                preparedStatementforInsert.executeUpdate();
+                connection.close();
+
+                Stage stage = (Stage) nazovField.getScene().getWindow();
+                stage.close();
+
+            }catch (NumberFormatException e){
+                errMessage.setText("Nezadali ste správnu sumu!");
+            }
         }
+
     }
 }

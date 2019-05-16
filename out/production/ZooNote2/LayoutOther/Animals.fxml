@@ -3,11 +3,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AnimalsController">
+<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AnimalsController">
+
 <children>
 <TableView fx:id="animalsTable" layoutX="66.0" layoutY="81.0" onMouseClicked="#showFromTable" prefHeight="392.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
    <columns>
@@ -29,11 +31,13 @@
       <Image url="@../image/minus.png" />
    </image>
 </ImageView>
-      <ImageView fx:id="zdravKartaBtn" fitHeight="48.0" fitWidth="54.0" layoutX="66.0" layoutY="14.0" onMouseClicked="#showAnimalInfo" pickOnBounds="true" preserveRatio="true" styleClass=".g">
+      <ImageView fx:id="zdravKartaBtn" fitHeight="48.0" fitWidth="54.0" layoutX="239.0" layoutY="13.0" onMouseClicked="#showAnimalInfo" pickOnBounds="true" preserveRatio="true" styleClass=".g">
          <image>
             <Image url="@../image/zdravotnaKartaIMG.png" />
          </image>
       </ImageView>
 <Label fx:id="errMessage" alignment="CENTER" layoutX="61.0" layoutY="540.0" prefHeight="17.0" prefWidth="691.0" textFill="RED" />
+      <Label fx:id="workaroundLabel" layoutX="372.0" layoutY="28.0" />
+      <TextField fx:id="searchField" layoutX="61.0" layoutY="25.0" styleClass="text" />
 </children>
         </fx:root>

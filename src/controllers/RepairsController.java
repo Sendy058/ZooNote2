@@ -9,15 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import Entities.Repair;
+import Entities.Repair;
+import Entities.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RepairsController implements Initializable {
+public class RepairsController extends loginController implements Initializable {
 
     @FXML
     private ChoiceBox filterBox = new ChoiceBox();
@@ -41,16 +40,16 @@ public class RepairsController implements Initializable {
     private TableColumn<Repair, Double> cenaColumn;
     @FXML
     private TableColumn<Repair, String> stavColumn;
+    @FXML
 
-    private Repair[] repairsArr;
-    private Repair[] filteredArr;
     private ResultSet dataRepairs;
     private String lastSelectedName = "", selectedName = "";
-    public static Repair selectedItem;
+    private Repair selectedItem;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         filterBox.setItems(FXCollections.observableArrayList("Prebiehajúce", "Potvrdené", "Zamietnuté", new Separator(), "Všetky"));
+        filterBox.getSelectionModel().selectLast();
 
         try {
             insertIntoTable("4");
@@ -61,8 +60,6 @@ public class RepairsController implements Initializable {
         filterBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 if (filterBox.getSelectionModel().getSelectedItem() != null) {
-                    System.out.println(newValue);
-                    System.out.println(newValue.toString()+" -index");
                     insertIntoTable(newValue.toString());
                 }
             } catch (SQLException e) {
@@ -70,7 +67,8 @@ public class RepairsController implements Initializable {
             }
         });
 
-        if (loginController.curentlyLoggedUser.getType().equals("opravar")) {
+        if (currentlyLoggedUser.getType().equals("opravar")) {
+
             addRepairBtn.setVisible(true);
         } else addRepairBtn.setVisible(false);
 
@@ -78,22 +76,35 @@ public class RepairsController implements Initializable {
         dismissBtn.setVisible(false);
         showInfoBtn.setVisible(false);
 
-        dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> setRepairStav("2"));
-        approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> setRepairStav("1"));
+        dismissBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
+            if(selectedItem.getStav().equals("Potvrdené")) {
+                plusBankovyUcet(selectedItem.getCena());
+            }
+
+            setRepairStav("Zamietnuté");
+        });
+        approveBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            if (selectedItem.getStav().equals("Zamietnuté")) {
+                minusBankovyUcet(selectedItem.getCena());
+            }
+
+            setRepairStav("Potvrdené");
+        });
     }
-
+    @FXML
     private void insertIntoTable(String filter) throws SQLException {
         Connection connection = ConnectionClass.getConnection();
         PreparedStatement selectRepairs, selectCount;
-        ObservableList<Repair> repairsObservableList;
-
         String selectCountSQL = "SELECT Count(*) FROM opravy";
+        assert connection != null;
         selectCount = connection.prepareStatement(selectCountSQL);
         ResultSet arrLen = selectCount.executeQuery();
         arrLen.next();
 
-        filteredArr = new Repair[Integer.parseInt(arrLen.getString(1))];
+        ObservableList<Repair> filteredList = FXCollections.observableArrayList();
+        ObservableList<Repair> repairObservableList = FXCollections.observableArrayList();
 
         if (filter == null) {
             filter = "4";
@@ -103,12 +114,10 @@ public class RepairsController implements Initializable {
         selectRepairs = connection.prepareStatement(selectAllSQL);
 
         dataRepairs = selectRepairs.executeQuery();
-        repairsArr = new Repair[Integer.parseInt(arrLen.getString(1))];
         dataRepairs.next();
 
         String stavString = "";
         for (int i = 0; i < Integer.parseInt(arrLen.getString(1)); i++) {
-
             switch (dataRepairs.getInt(4)) {
                 case 0:
                     stavString = "Prebiehajúce";
@@ -120,28 +129,27 @@ public class RepairsController implements Initializable {
                     stavString = "Zamietnuté";
                     break;
             }
-            repairsArr[i] = new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5));
+            repairObservableList.add(new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5)));
 
-            System.out.println(dataRepairs.getString(4)+" data "+filter+" filter"+dataRepairs.getString(4).equals(filter)+" bool");
             if (dataRepairs.getString(4).equals(filter)) {
-                filteredArr[i] = new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5));
-                System.out.println(filteredArr[i]+"-filter");
+                filteredList.add(new Repair(dataRepairs.getString(2), dataRepairs.getString(3), stavString, dataRepairs.getDouble(5)));
             }
-            //System.out.println(filteredArr[i]+" filteredArr");
             dataRepairs.next();
         }
-
         nazovColumn.setCellValueFactory(new PropertyValueFactory<>("nazov"));
         cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
         stavColumn.setCellValueFactory(new PropertyValueFactory<>("stav"));
+
         if (filter.equals("4")) {
-            repairsObservableList = FXCollections.observableArrayList(repairsArr);
+            repairsTable.setItems(repairObservableList);
         } else {
-            repairsObservableList = FXCollections.observableArrayList(filteredArr);
+            if (filteredList.isEmpty()) {
+                filteredList.add(null);
+            }
+            repairsTable.setItems(filteredList);
         }
-        repairsTable.setItems(repairsObservableList);
+        repairsTable.refresh();
         connection.close();
-        System.out.println("connection closed -repairs");
     }
 
     public void showFromTable() {
@@ -166,12 +174,12 @@ public class RepairsController implements Initializable {
     }
 
     private void setVisible(boolean bool) {
-        if (loginController.curentlyLoggedUser.getType().equals("admin")) {
+        if (currentlyLoggedUser.getType().equals("admin")) {
             dismissBtn.setVisible(bool);
             approveBtn.setVisible(bool);
             showInfoBtn.setVisible(bool);
 
-        } else if (loginController.curentlyLoggedUser.getType().equals("opravar")) {
+        } else {
             dismissBtn.setVisible(false);
             approveBtn.setVisible(false);
             showInfoBtn.setVisible(bool);
@@ -185,41 +193,83 @@ public class RepairsController implements Initializable {
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
+
+
+
     public void showRepairInfo() throws IOException {
+        FXMLLoader Loader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
+        Parent root2 = Loader.load();
+
+        RepairInfoController info = Loader.getController();
+        info.setText(selectedItem.getCena(), selectedItem.getNazov(), selectedItem.getPopis());
+
         Stage stage = new Stage();
-        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/RepairInfo.fxml"));
         stage.setTitle("Informácie o oprave");
         stage.setScene(new Scene(root2, 400, 600));
         stage.show();
     }
 
     private void setRepairStav(String stav) {
-        if (!stav.equals(null)) {
-            Connection connection = ConnectionClass.getConnection();
-            String updateSql = "UPDATE opravy SET stav = ? WHERE nazov_opravy LIKE ?";
-            try {
-                PreparedStatement preparedStatementForUpdate = connection.prepareStatement(updateSql);
-                preparedStatementForUpdate.setString(1, stav);
-                preparedStatementForUpdate.setString(2, selectedName);
-                preparedStatementForUpdate.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            switch (stav) {
-                case "1":
-                    stav = "Potvrdené";
-                    break;
-                case "2":
-                    stav = "Zamietnuté";
-                    break;
-            }
-            repairsTable.getSelectionModel().getSelectedItem().setStav(stav);
-            repairsTable.refresh();
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }else System.out.println("you fucked up");
+        repairsTable.getSelectionModel().getSelectedItem().setStav(stav);
+        repairsTable.refresh();
+
+        switch (stav) {
+            case "Potvrdené":
+                stav = "1";
+                break;
+            case "Zamietnuté":
+                stav = "2";
+                break;
+        }
+
+        Connection connection = ConnectionClass.getConnection();
+        String updateSql = "UPDATE opravy SET stav = ? WHERE nazov_opravy LIKE ?";
+        try {
+            PreparedStatement preparedStatementForUpdate = connection.prepareStatement(updateSql);
+            preparedStatementForUpdate.setString(1, stav);
+            preparedStatementForUpdate.setString(2, selectedName);
+            preparedStatementForUpdate.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    private void minusBankovyUcet(Double cena)  {
+        try {
+            Connection connection = ConnectionClass.getConnection();
+            String sqlMinus = "UPDATE bankovy_ucet SET stav = stav - ?";
+            PreparedStatement preparedStatementForMinus = connection.prepareStatement(sqlMinus);
+            preparedStatementForMinus.setDouble(1, cena);
+            preparedStatementForMinus.executeUpdate();
+
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("-"+cena);
+    }
+
+    private void plusBankovyUcet(Double cena){
+        try {
+            Connection connection = ConnectionClass.getConnection();
+            String sqlPlus = "UPDATE bankovy_ucet SET stav = stav + ?";
+            PreparedStatement preparedStatementForPlus = connection.prepareStatement(sqlPlus);
+            preparedStatementForPlus.setDouble(1, cena);
+            preparedStatementForPlus.executeUpdate();
+
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("+"+cena);
+    }
+
 }
