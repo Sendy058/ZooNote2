@@ -1,4 +1,4 @@
-package sample;
+package Email;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;

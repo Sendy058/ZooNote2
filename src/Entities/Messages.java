@@ -1,4 +1,4 @@
-package sample;
+package Entities;
 
 public class Messages {
     private int id;

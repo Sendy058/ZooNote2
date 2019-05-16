@@ -157,9 +157,6 @@ public class FinancesController  implements Initializable {
                 if (1 == Integer.parseInt(opravy.getString(4))) {
                     pieChartDataOpravy.add(new PieChart.Data(opravy.getString(2), opravy.getDouble(5)));
                     opravKomplet=opravKomplet+opravy.getDouble(5);
-
-
-
                 }
 
                 opravy.next();

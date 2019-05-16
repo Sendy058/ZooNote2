@@ -1,6 +1,7 @@
-package sample;
+package Entities;
 
 public class BankAccount {
+
     private int id;
     private double stav;
 

@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import sample.Encryption;
 import sample.RequestUsersData;
-import sample.User;
+import Entities.User;
 
 import java.io.IOException;
 import java.net.URL;

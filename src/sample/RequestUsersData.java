@@ -1,5 +1,6 @@
 package sample;
 
+import Entities.User;
 import connectivity.ConnectionClass;
 
 import java.sql.Connection;
@@ -12,6 +13,11 @@ import java.util.logging.Logger;
 import static controllers.loginController.nameSurname;
 
 public class RequestUsersData {
+
+    /**
+     * Class for getting user data from database.
+     * @return user with parameters from database
+     */
 
     private PreparedStatement statement = null;
     private User user;
