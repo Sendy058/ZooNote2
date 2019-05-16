@@ -50,12 +50,8 @@ public class AddUserController implements Initializable {
     private String data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("LayoutOther/Users.fxml"));
-        try {
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) menoField.getScene().getWindow();
+        stage.close();
 
         }
     public void getFromFields(){
@@ -70,18 +66,8 @@ public class AddUserController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //Stage stage = (Stage) menoField.getScene().getWindow();
-       // stage.close();
-        /*Stage stage = (Stage) menoField.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
-        stage.setTitle("Pridanie Pouzivatela");
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
-
-
-
+        Stage stage = (Stage) menoField.getScene().getWindow();
+        stage.close();
 
 
     }

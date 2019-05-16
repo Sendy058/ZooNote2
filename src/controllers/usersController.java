@@ -108,12 +108,11 @@ public class usersController implements Initializable {
         }
 
     public void onAddUserBtnClick() throws IOException {
-
-        Stage stage = (Stage) usersTable.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
-        stage.setTitle("Pridanie používateľa");
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Stage stage = new Stage();
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/AddUser.fxml"));
+        stage.setTitle("Info");
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
         stage.show();
     }
 

@@ -255,9 +255,9 @@ public class FinancesController  implements Initializable {
 
 
 
-                if (p==1  /*&&zvierata.getInt(5)==1 && zvierata.getInt(4)==1*/) {
-                    pieChartDataZvierata.add(new PieChart.Data(zvierata.getString(3), zvierata.getDouble(5)));
-                    zvieraKomplet=zvieraKomplet+zvierata.getDouble(5);
+                if (p==1 &&zvierata.getInt(2)==1 && zvierata.getInt(7)!=1) {
+                    pieChartDataZvierata.add(new PieChart.Data(zvierata.getString(3), Double.parseDouble(zvierata.getString(5).substring(1))));
+                    zvieraKomplet=zvieraKomplet+Double.parseDouble(zvierata.getString(5).substring(1));
                 }
 
                 zvierata.next();
