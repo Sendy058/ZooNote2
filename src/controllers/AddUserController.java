@@ -45,7 +45,7 @@ public class AddUserController extends contentController implements Initializabl
     @FXML
     private Label zle;
 
-    private String data [] = new String[6];
+    private String Data [] = new String[6];
 
     public void onBackBtnClick() throws IOException {
 
@@ -54,32 +54,27 @@ public class AddUserController extends contentController implements Initializabl
 
         }
     public void getFromFields(){
-        data[3] = menoField.getText();
-        data[4] = priezviskoField.getText();
-        data[0] = usernameField.getText();
-        data[5] = emailField.getText();
-        data[1] = Encryption.MD5(hesloField.getText());
-        data[2] = cb.getValue();
+        Data[3] = menoField.getText();
+        Data[4] = priezviskoField.getText();
+        Data[0] = usernameField.getText();
+        Data[5] = emailField.getText();
+        Data[1] = Encryption.MD5(hesloField.getText());
+        Data[2] = cb.getValue();
         try {
             register();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Stage stage = (Stage) menoField.getScene().getWindow();
-        stage.close();
-
-
-
     }
     private void register() throws SQLException {
         Connection connection = ConnectionClass.getConnection();
         String insertQuery = "INSERT INTO pouzivatel(username,password,typ_konta,meno,priezvisko,email) VALUES(?,?,?,?,?,?)";
+        System.out.println(checkFieldData());
         if (checkFieldData()) {
             try {
                 PreparedStatement preparedStatementForInsert = connection.prepareStatement(insertQuery);
                 for (int i = 0; i < 6; i++) {
-                    preparedStatementForInsert.setString(i + 1, data[i]);
+                    preparedStatementForInsert.setString(i + 1, Data[i]);
                 }
                 preparedStatementForInsert.executeUpdate();
                 zle.setText("Registrácia prebehla úspešne!");
@@ -87,15 +82,18 @@ public class AddUserController extends contentController implements Initializabl
                 e.printStackTrace();
             }finally {
                 connection.close();
+
+                Stage stage = (Stage) menoField.getScene().getWindow();
+                stage.close();
             }
         }
     }
     private boolean checkFieldData(){
-        if (data[0] == null ||data[1] == null || data[2] == null || data[3] == null || data[4] == null || data[5] == null){
+        if (Data[0].isEmpty() ||Data[1].isEmpty() || Data[2].isEmpty() || Data[3].isEmpty() || Data[4].isEmpty() || Data[5].isEmpty()){
             zle.setText("Všetky polia sú povinné!");
             return false;
         }
-        else if (!data[5].contains("@")){
+        else if (!Data[5].contains("@")){
             zle.setText("Zadali ste neplatný email!");
             return false;
         }

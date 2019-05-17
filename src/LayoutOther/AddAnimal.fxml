@@ -11,6 +11,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="400.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddAnimalController">
 
+
     <children>
         <Line endX="174.0" layoutX="201.0" layoutY="78.0" startX="-175.0" />
         <Label layoutX="37.0" layoutY="94.0" prefHeight="20.0" prefWidth="161.0" text="DÁTUM NARODENIA:">

@@ -39,5 +39,10 @@
 <Label fx:id="errMessage" alignment="CENTER" layoutX="61.0" layoutY="540.0" prefHeight="17.0" prefWidth="691.0" textFill="RED" />
       <Label fx:id="workaroundLabel" layoutX="372.0" layoutY="28.0" />
       <TextField fx:id="searchField" layoutX="61.0" layoutY="25.0" styleClass="text" />
+      <ImageView fitHeight="62.0" fitWidth="48.0" layoutX="704.0" layoutY="481.0" onMouseClicked="#refreshTable" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/updateBtnImg.png" />
+         </image>
+      </ImageView>
 </children>
         </fx:root>

@@ -7,11 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<fx:root prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ResetPass">
-=======
-<fx:root prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Email.ResetPass">
->>>>>>> 6b9d03dad177f579f483e8bfae684a3df9ce84ed
+<fx:root prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Email.ResetPass">
     <children>
         <TextField fx:id="kodRess" layoutX="269.0" layoutY="127.0" onAction="#over" prefHeight="45.0" prefWidth="250.0" styleClass="text">
             <font>
@@ -27,7 +23,7 @@
                 <Image url="@../image/nazat.png" />
             </image>
         </ImageView>
-        <Label fx:id="ErrorResPass" layoutX="246.0" layoutY="302.0" prefHeight="21.0" prefWidth="306.0" textFill="RED" />
+        <Label fx:id="ErrorResPass" contentDisplay="CENTER" layoutX="246.0" layoutY="302.0" prefHeight="21.0" prefWidth="306.0" textFill="RED" />
         <ImageView fitHeight="52.0" fitWidth="62.0" layoutX="363.0" layoutY="204.0" onMouseClicked="#over" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
             <image>
                 <Image url="@../image/dalej.png" />
