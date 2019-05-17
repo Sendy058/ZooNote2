@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="content.contentController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="content.contentController">
    <center>
       <AnchorPane id="ddd" fx:id="contentPane" prefHeight="1080.0" prefWidth="1920.0" scaleZ="-1.0" style="-fx-background-image: url(&quot;Iimages/background.png&quot;);" stylesheets="@../style.css" BorderPane.alignment="CENTER" />
    </center>
@@ -40,27 +40,27 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Button fx:id="homeBtn" alignment="TOP_LEFT" layoutX="52.0" layoutY="204.0" mnemonicParsing="false" onAction="#onHomeBtnClick" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: transparent;" stylesheets="@../style.css" text="DOMOV" textFill="WHITE">
+            <Button fx:id="homeBtn" alignment="TOP_LEFT" layoutX="52.0" layoutY="204.0" mnemonicParsing="false" onAction="#onHomeBtnClick" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: transparent;" styleClass="imageBtnAdm" stylesheets="@../style.css" text="DOMOV" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="financeBtn" alignment="TOP_LEFT" layoutX="52.0" layoutY="242.0" mnemonicParsing="false" onAction="#onFinancesBtnClick" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: transparent;" text="FINANCIE" textFill="WHITE">
+            <Button fx:id="financeBtn" alignment="TOP_LEFT" layoutX="52.0" layoutY="242.0" mnemonicParsing="false" onAction="#onFinancesBtnClick" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: transparent;" styleClass="imageBtnAdm" text="FINANCIE" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="zvierataBtn" alignment="TOP_LEFT" layoutX="54.0" layoutY="282.0" mnemonicParsing="false" onAction="#onAnimalsBtnClick" prefHeight="39.0" prefWidth="134.0" style="-fx-background-color: transparent;" text="ZVIERATÁ" textFill="WHITE">
+            <Button fx:id="zvierataBtn" alignment="TOP_LEFT" layoutX="54.0" layoutY="282.0" mnemonicParsing="false" onAction="#onAnimalsBtnClick" prefHeight="39.0" prefWidth="134.0" style="-fx-background-color: transparent;" styleClass="imageBtnAdm" text="ZVIERATÁ" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="spraviBtn" alignment="TOP_LEFT" layoutX="54.0" layoutY="320.0" mnemonicParsing="false" onAction="#onInvoicesBtnClick" prefHeight="39.0" prefWidth="133.0" style="-fx-background-color: transparent;" text="SPRÁVY" textFill="WHITE">
+            <Button fx:id="spraviBtn" alignment="TOP_LEFT" layoutX="54.0" layoutY="320.0" mnemonicParsing="false" onAction="#onInvoicesBtnClick" prefHeight="39.0" prefWidth="133.0" style="-fx-background-color: transparent;" styleClass="imageBtnAdm" text="SPRÁVY" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="opraviBtn" alignment="TOP_LEFT" layoutX="56.0" layoutY="360.0" mnemonicParsing="false" onAction="#onRepairsBtnClick" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: transparent;" text="OPRAVY" textFill="WHITE">
+            <Button fx:id="opraviBtn" alignment="TOP_LEFT" layoutX="56.0" layoutY="360.0" mnemonicParsing="false" onAction="#onRepairsBtnClick" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: transparent;" styleClass="imageBtnAdm" text="OPRAVY" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="kontaBtn" alignment="TOP_LEFT" layoutX="56.0" layoutY="399.0" mnemonicParsing="false" onAction="#onUsersBtnClick" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: transparent;" text="KONTÁ" textFill="WHITE">
+            <Button fx:id="kontaBtn" alignment="TOP_LEFT" layoutX="56.0" layoutY="399.0" mnemonicParsing="false" onAction="#onUsersBtnClick" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: transparent;" styleClass="imageBtnAdm" text="KONTÁ" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font></Button>

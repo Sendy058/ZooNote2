@@ -133,8 +133,7 @@ public class messagesController extends loginController implements Initializable
 
 
                     zisti(data.getInt(7));
-                    System.out.println(data.getInt(6) + "," + primatel);
-                    System.out.println(odosielatelString + "," + currentlyLoggedUser.getType());
+
                     if (data.getInt(6) == primatel || odosielatelString.equals(currentlyLoggedUser.getType())) {
 
                         switch (data.getInt(2)) {

@@ -229,7 +229,7 @@ public class FinancesController  implements Initializable {
 
 
         int dlzka = resultSetSizeZvie.getInt(1);
-        System.out.println(dlzka);
+
         int dlzkaU=resultUser.getInt(1);
         zvierata.next();
         int p=0;

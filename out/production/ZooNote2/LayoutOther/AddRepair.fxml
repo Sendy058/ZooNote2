@@ -9,8 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddRepairController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddRepairController">
 
     <children>
         <Line endX="174.0" layoutX="201.0" layoutY="78.0" startX="-175.0" />
@@ -39,7 +38,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="64.0" fitWidth="75.0" layoutX="170.0" layoutY="518.0" onMouseClicked="#addRepair" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="64.0" fitWidth="75.0" layoutX="170.0" layoutY="518.0" onMouseClicked="#addRepair" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
          <image>
             <Image url="@../image/checkMark.png" />
          </image></ImageView>

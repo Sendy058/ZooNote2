@@ -87,9 +87,7 @@ public class AddMessages extends loginController implements Initializable {
             Date today = Calendar.getInstance().getTime();
             String todayString = df.format(today);
             data[6]=todayString;
-            System.out.println("som tu");
-            System.out.println(data[3]);
-    System.out.println(data[0]);
+
             if(data[0].equals("2")) {
             data[3]="0";
             cenaFile.setText("0");
@@ -101,12 +99,12 @@ public class AddMessages extends loginController implements Initializable {
 
           if (data[3].isEmpty()||data[2].isEmpty()||data[1].isEmpty()){
             label.setVisible(true);
-            System.out.println("opa");
+
         }
 
     else {
             try {
-                System.out.println(data[3]);
+
 
                     Double.parseDouble(cenaFile.getText());
 
@@ -125,7 +123,6 @@ public class AddMessages extends loginController implements Initializable {
                 }
 
                 for (int i = 0; i < 7; i++) {
-                    System.out.println(data[i]);
                 }
                 Connection connection = ConnectionClass.getConnection();
                 String insertQuery = "INSERT INTO sprava(typ_spravy,nazov_spravy,obsah,cena,prijemca,odosielatel,datum_odoslania) VALUES(?,?,?,?,?,?,?)";
