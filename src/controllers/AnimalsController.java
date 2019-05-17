@@ -193,12 +193,12 @@ public class AnimalsController extends loginController implements Initializable 
         stage.show();
     }
 
-    public void refreshTable() {
+
+    public void refreshTable() throws SQLException {
         animalList.clear();
         Connection connection = ConnectionClass.getConnection();
         String sqlQuery = "SELECT * FROM zviera";
         String countQuery = "SELECT Count(*) FROM zviera";
-
         PreparedStatement preparedQuery, preparedCountStatement;
         try {
             preparedCountStatement = connection.prepareStatement(countQuery);
@@ -229,4 +229,7 @@ public class AnimalsController extends loginController implements Initializable 
     }
 
 
-}
+
+
+
+    }
