@@ -48,7 +48,7 @@ public class messagesController extends loginController implements Initializable
     private TableColumn<Messages, String> datumColumn;
     private ResultSet resultUser, user;
     private String odosielatelString;
-    private String odosielatel="";
+    private String odosielatel = "";
     private int primatel;
     private int typKonta;
     private String lastSelectedId = "", selectedId = "";
@@ -69,7 +69,6 @@ public class messagesController extends loginController implements Initializable
             preparedQuery = connection.prepareStatement(sqlQuery);
             data = preparedQuery.executeQuery();
             data.next();
-
 
             insertIntoTableAdmin();
         } catch (SQLException e) {
@@ -132,7 +131,6 @@ public class messagesController extends loginController implements Initializable
             if (!data.isClosed()) {
                 for (int i = 0; i < p; i++) {
 
-
                     zisti(data.getInt(7));
 
                     if (data.getInt(6) == primatel || odosielatelString.equals(currentlyLoggedUser.getType())) {
@@ -147,7 +145,7 @@ public class messagesController extends loginController implements Initializable
                         }
 
 
-                        mssData.add(new Messages(data.getString(1),typ, data.getString(3), data.getString(4), data.getString(5), data.getString(6), zisti(data.getInt(7)),odosielatel, data.getString(8)));
+                        mssData.add(new Messages(data.getString(1), typ, data.getString(3), data.getString(4), data.getString(5), data.getString(6), zisti(data.getInt(7)), odosielatel, data.getString(8)));
                     }
                     data.next();
 
@@ -169,10 +167,9 @@ public class messagesController extends loginController implements Initializable
     }
 
 
-
-    public String zisti(int id)throws SQLException{
-        String S="";
-        odosielatel="";
+    public String zisti(int id) throws SQLException {
+        String S = "";
+        odosielatel = "";
         Connection connection = ConnectionClass.getConnection();
         String sql = "SELECT typ_konta,meno,priezvisko  from pouzivatel WHERE id_pouzivatel=?";
         PreparedStatement statementForKonto = connection.prepareStatement(sql);
@@ -193,8 +190,8 @@ public class messagesController extends loginController implements Initializable
 
         }
 
-        odosielatel=odosielatel+Konto.getString(2)+Konto.getString(3);
-        odosielatelString=Konto.getString(1);
+        odosielatel = odosielatel + Konto.getString(2) + Konto.getString(3);
+        odosielatelString = Konto.getString(1);
 
         connection.close();
 
@@ -224,17 +221,11 @@ public class messagesController extends loginController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-    dataInport();
+        dataInport();
         deletBtn.setVisible(false);
         infoBtn.setVisible(false);
 
     }
-
-
-
-
-
-
 
     public void showFromTable() {
         try {
@@ -258,8 +249,8 @@ public class messagesController extends loginController implements Initializable
     }
 
     private void setVisible(boolean bool) {
-            deletBtn.setVisible(bool);
-            infoBtn.setVisible(bool);
+        deletBtn.setVisible(bool);
+        infoBtn.setVisible(bool);
 
 
     }
@@ -269,7 +260,7 @@ public class messagesController extends loginController implements Initializable
             Connection connection = ConnectionClass.getConnection();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Upozornenie");
-            alert.setHeaderText("Naozaj si prajete zmazať túto správu?" );
+            alert.setHeaderText("Naozaj si prajete zmazať túto správu?");
             alert.setContentText(":(");
 
             Optional<ButtonType> result = alert.showAndWait();
@@ -292,7 +283,6 @@ public void upDate(){
         data=null;
         resultSetSize=null;
         dataInport();
-
 
 
 

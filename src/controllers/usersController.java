@@ -88,7 +88,9 @@ public class usersController implements Initializable {
             data.next();
             for (int i = 0; i < Integer.parseInt(resultSetSize.getString(1)); i++) {
                 if (!data.isClosed()) {
-                    userList.add(new User(data.getString(5), data.getString(6), data.getString(2), data.getString(7), data.getString(4)));
+                    if (!data.getString(2).equals("admin")) {
+                        userList.add(new User(data.getString(5), data.getString(6), data.getString(2), data.getString(7), data.getString(4)));
+                    }
                     data.next();
                 }
             }
@@ -206,6 +208,32 @@ public class usersController implements Initializable {
             typeUpdate.setText(usersTable.getSelectionModel().getSelectedItem().getType());
         }catch (NullPointerException e){
         }
+    }
+    public void upDate(){
+        userList.clear();
+        Connection connection = ConnectionClass.getConnection();
+        String sqlQuery = "SELECT * FROM pouzivatel";
+        String countQuery = "SELECT Count(*) FROM pouzivatel";
+
+        try {
+            PreparedStatement preparedCountStatement = connection.prepareStatement(countQuery);
+            resultSetSize = preparedCountStatement.executeQuery();
+            resultSetSize.next();
+            PreparedStatement preparedQuery = connection.prepareStatement(sqlQuery);
+            data = preparedQuery.executeQuery();
+            insertIntoTable();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        setVisible(false);
+
     }
 }
 

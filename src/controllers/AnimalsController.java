@@ -193,5 +193,40 @@ public class AnimalsController extends loginController implements Initializable 
         stage.show();
     }
 
+    public void refreshTable() {
+        animalList.clear();
+        Connection connection = ConnectionClass.getConnection();
+        String sqlQuery = "SELECT * FROM zviera";
+        String countQuery = "SELECT Count(*) FROM zviera";
+
+        PreparedStatement preparedQuery, preparedCountStatement;
+        try {
+            preparedCountStatement = connection.prepareStatement(countQuery);
+            resultSetSize = preparedCountStatement.executeQuery();
+            size = resultSetSize.getInt(1);
+            preparedQuery = connection.prepareStatement(sqlQuery);
+            data = preparedQuery.executeQuery();
+            data.next();
+            for (int i = 0; i < size; i++) {
+                animalList.add(new Animal(data.getString(2), data.getString(3), data.getString(4), data.getString(5), data.getString(6), data.getString(7), data.getString(8), data.getString(9)));
+                data.next();
+            }
+            insertIntoTable("");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        setVisible(false);
+
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            insertIntoTable(newValue);
+        });
+    }
+
 
 }

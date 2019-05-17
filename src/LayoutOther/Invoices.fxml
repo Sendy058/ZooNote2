@@ -6,8 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
+<fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
    <children>
+
       <TableView fx:id="messagesTable" layoutX="69.0" layoutY="99.0" onMouseClicked="#showFromTable" prefHeight="392.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
          <columns>
             <TableColumn fx:id="nazovColumn" prefWidth="167.20001220703125" resizable="false" text="PREDMET" />
