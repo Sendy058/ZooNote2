@@ -1,4 +1,4 @@
-package sample;
+package Email;
 
 import connectivity.ConnectionClass;
 import javafx.fxml.FXML;
@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.Encryption;
+
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -28,14 +30,80 @@ import java.util.ResourceBundle;
 
 public class ResetPass implements Initializable {
 
-    static String kodS ="";
-    static String mail="";
+    /**
+     * This class sends email with verification code to given email address.
+     */
+
+   @FXML
+   private ImageView back;
+    @FXML
+    BorderPane mainPane;
+    @FXML
+    private TextField loginRess;
+
+    @FXML
+    private TextField kodRess;
+
+    @FXML
+    private Label ErrorResPass;
+
+    @FXML
+    private TextField hesloRes;
+
+    @FXML
+    private TextField hesloRes2;
+
+    private String kodS ="";
+    private String mail="";
+
+    @FXML
+   private void odosli() throws SQLException {
+
+        String xLogin=loginRess.getText();
+
+       String sqlEmail = "SELECT email FROM pouzivatel WHERE username = ?" ;
 
 
-    public boolean send(String mail ,String kod) {
+       Connection connection = ConnectionClass.getConnection();
+
+       PreparedStatement statementForEmail = connection.prepareStatement(sqlEmail);
+       statementForEmail.setString(1, xLogin);
+       ResultSet Email = statementForEmail.executeQuery();
+       Email.next();
+
+       if (!Email.isClosed() || !Email.isClosed()) {
+
+           mail =Email.getString(1);
+           connection.close();
+           kod();
+            if (send(mail,kodS)==true) {
+                ResetPass2 pane = new ResetPass2();
+                mainPane.setCenter(pane);
+                ErrorResPass.setText("Odosielanie prebehlo úspešne");
+
+            }else ErrorResPass.setText("NEPODARLO SA ODOSLAŤ EMAIL");
+
+
+       }
+       else{
+           ErrorResPass.setText("Zadané používateľské meno neexistuje!");
+           loginRess.setText("");
+       }
+   }
+
+
+
+    public void kod(){
+        String kod="";
+        for (int i=0;i<6;i++){
+            kod=kod + ((int)(Math.random()*10));
+        }
+        kodS=kod;
+    }
+
+    public boolean send(String mail, String kod) {
 
         try {
-
             String host = "smtp.gmail.com";
             String user = "zoonote.ke@gmail.com";
             String pass = "Zoonote125";
@@ -82,67 +150,6 @@ public class ResetPass implements Initializable {
 
         }
     }
-
-    public void kod(){
-        String kod="";
-        for (int i=0;i<6;i++){
-            kod=kod + ((int)(Math.random()*10));
-        }
-        kodS=kod;
-    }
-   @FXML
-   private ImageView back;
-    @FXML
-    BorderPane mainPane;
-    @FXML
-    private TextField loginRess;
-
-    @FXML
-    private TextField kodRess;
-
-    @FXML
-    private Label ErrorResPass;
-
-    @FXML
-    private TextField hesloRes;
-
-    @FXML
-    private TextField hesloRes2;
-
-   @FXML
-   private void odosli() throws SQLException {
-
-        String xLogin=loginRess.getText();
-
-       String sqlEmail = "SELECT email FROM pouzivatel WHERE username = ?" ;
-
-
-       Connection connection = ConnectionClass.getConnection();
-
-       PreparedStatement statementForEmail = connection.prepareStatement(sqlEmail);
-       statementForEmail.setString(1, xLogin);
-       ResultSet Email = statementForEmail.executeQuery();
-       Email.next();
-
-       if (!Email.isClosed() || !Email.isClosed()) {
-
-           mail =Email.getString(1);
-           connection.close();
-           kod();
-            if (send(mail,kodS)==true) {
-                ResetPass2 pane = new ResetPass2();
-                mainPane.setCenter(pane);
-                ErrorResPass.setText("Odosielanie prebehlo úspešne");
-
-            }else ErrorResPass.setText("NEPODARLO SA ODOSLAŤ EMAIL");
-
-
-       }
-       else{
-           ErrorResPass.setText("Zadané používateľské meno neexistuje!");
-           loginRess.setText("");
-       }
-   }
 
    @FXML
     private void spat(){
@@ -193,7 +200,7 @@ public class ResetPass implements Initializable {
         } else {
 
             String password;
-            password=Encryption.MD5(newHeslo);
+            password= Encryption.MD5(newHeslo);
 
             String sql = "UPDATE pouzivatel SET password = ? WHERE email = ?";
 

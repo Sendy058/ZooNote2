@@ -1,6 +1,6 @@
 package controllers;
 
-import sample.BankAccount;
+import Entities.BankAccount;
 import connectivity.ConnectionClass;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

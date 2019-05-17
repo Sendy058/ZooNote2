@@ -5,7 +5,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="600.0" prefWidth="400.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RepairInfoController">
+=======
+<AnchorPane prefHeight="600.0" prefWidth="400.0" styleClass="backGr" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RepairInfoController">
+>>>>>>> 6b9d03dad177f579f483e8bfae684a3df9ce84ed
 
     <children>
         <Label fx:id="menoLabel" alignment="CENTER" layoutX="12.0" layoutY="25.0" prefHeight="17.0" prefWidth="377.0" text="OPRAVA">

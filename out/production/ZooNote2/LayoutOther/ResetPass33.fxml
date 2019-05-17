@@ -7,7 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ResetPass">
+=======
+<AnchorPane prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Email.ResetPass">
+>>>>>>> 6b9d03dad177f579f483e8bfae684a3df9ce84ed
     <children>
         <Label layoutX="272.0" layoutY="92.0" text="NOVE HESLO">
             <font>

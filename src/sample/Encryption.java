@@ -4,6 +4,16 @@ import java.math.*;
 import java.security.*;
 
 public class Encryption {
+
+    /**
+     * This class hashes password using a cryptographic hash function containing a string of digits
+     * created by a one-way hashing formula.
+     *
+     * @author Martin Mochnacky
+     * @param input password
+     * @return hashed input parameter
+     */
+
     public static String MD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

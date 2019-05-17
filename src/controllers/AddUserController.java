@@ -1,7 +1,6 @@
 package controllers;
 
 import connectivity.ConnectionClass;
-import content.Users;
 import content.contentController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.Encryption;
-import sample.User;
+import Entities.User;
 
 import java.io.IOException;
 import java.net.URL;

@@ -19,6 +19,10 @@ import java.util.ResourceBundle;
 
 public class contentController extends loginController implements Initializable {
 
+    /**
+     * Basically menu controller
+     */
+
     @FXML
     private BorderPane mainPane;
     @FXML
