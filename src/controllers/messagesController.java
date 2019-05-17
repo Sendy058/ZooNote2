@@ -9,9 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,16 +20,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class messagesController extends loginController implements Initializable {
     private ResultSet data, resultSetSize;
     ObservableList<Messages> mssData = FXCollections.observableArrayList();
     ObservableList<Messages> mssDataUser = FXCollections.observableArrayList();
-    // private String lastSelectedName = "", selectedName = "";
+    // private String lastSelectedId = "", selectedId = "";
     //  public static Animal selectedItem;
 
-
+    @FXML
+    private ImageView deletBtn;
+    @FXML
+    private ImageView infoBtn;
     @FXML
     private TableView<Messages> messagesTable;
     @FXML
@@ -42,9 +46,11 @@ public class messagesController extends loginController implements Initializable
     private TableColumn<Messages, String> datumColumn;
     private ResultSet resultUser, user;
     private String odosielatelString;
-    private int odosielatel;
+    private String odosielatel="";
     private int primatel;
     private int typKonta;
+    private String lastSelectedId = "", selectedId = "";
+    public static Messages selectedItem;
 
 
     public void dataInport() {
@@ -140,7 +146,7 @@ public class messagesController extends loginController implements Initializable
                         }
 
 
-                        mssData.add(new Messages(typ, data.getString(3), data.getString(4), data.getString(5), data.getString(6), zisti(data.getInt(7)), data.getString(8)));
+                        mssData.add(new Messages(data.getString(1),typ, data.getString(3), data.getString(4), data.getString(5), data.getString(6), zisti(data.getInt(7)),odosielatel, data.getString(8)));
                     }
                     data.next();
 
@@ -154,7 +160,7 @@ public class messagesController extends loginController implements Initializable
             //   ObservableList<Messages> adminSpravyList = FXCollections.observableArrayList(mssData);
             messagesTable.setItems(mssData);
             connection.close();
-            messagesTable.setItems(mssData);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,11 +168,12 @@ public class messagesController extends loginController implements Initializable
     }
 
 
-    public String zisti(int id) throws SQLException {
-        String S = "";
-        String sql = "SELECT typ_konta  from pouzivatel WHERE id_pouzivatel=?";
-        Connection connection = ConnectionClass.getConnection();
 
+    public String zisti(int id)throws SQLException{
+        String S="";
+        odosielatel="";
+        Connection connection = ConnectionClass.getConnection();
+        String sql = "SELECT typ_konta,meno,priezvisko  from pouzivatel WHERE id_pouzivatel=?";
         PreparedStatement statementForKonto = connection.prepareStatement(sql);
         statementForKonto.setInt(1, id);
         ResultSet Konto = statementForKonto.executeQuery();
@@ -184,7 +191,10 @@ public class messagesController extends loginController implements Initializable
                 break;
 
         }
-        odosielatelString = Konto.getString(1);
+
+        odosielatel=odosielatel+Konto.getString(2)+Konto.getString(3);
+        odosielatelString=Konto.getString(1);
+
         connection.close();
 
         return S;
@@ -200,32 +210,82 @@ public class messagesController extends loginController implements Initializable
         stage.show();
     }
 
+    public void showMessagesInfo() throws IOException {
+        Stage stage = new Stage();
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LayoutOther/MessagesInfo.fxml"));
+        stage.setTitle("Info");
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
+        stage.show();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dataInport();
+
+    dataInport();
+        deletBtn.setVisible(false);
+        infoBtn.setVisible(false);
 
     }
 
 
-    public void nastavP() throws SQLException {
-
-        String sql = "SELECT id_pouzivatel  from pouzivatel WHERE username=?";
-        Connection connection = ConnectionClass.getConnection();
-
-        PreparedStatement statementForKonto = connection.prepareStatement(sql);
-        statementForKonto.setString(1, currentlyLoggedUser.getUsername());
-        ResultSet Konto = statementForKonto.executeQuery();
-        Konto.next();
-
-        if (!Konto.isClosed() || !Konto.isClosed()) {
-            typKonta = Konto.getInt(1);
-
-            connection.close();
 
 
+
+
+
+    public void showFromTable() {
+        try {
+            lastSelectedId = selectedId;
+            selectedId = messagesTable.getSelectionModel().getSelectedItem().getId();
+            selectedItem = messagesTable.getSelectionModel().getSelectedItem();
+
+            setVisible(true);
+
+        } catch (NullPointerException e) {
+            setVisible(false);
+            selectedId = "";
         }
+        if (selectedId.equals(lastSelectedId)) {
+            setVisible(false);
+
+            lastSelectedId = selectedId;
+            selectedId = "";
+            messagesTable.getSelectionModel().clearSelection();
+        }
+    }
+
+    private void setVisible(boolean bool) {
+            deletBtn.setVisible(bool);
+            infoBtn.setVisible(bool);
 
 
     }
+
+    public void deleteMessages() {
+        try {
+            Connection connection = ConnectionClass.getConnection();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Upozornenie");
+            alert.setHeaderText("Naozaj si prajete zmazať túto správu?" );
+            alert.setContentText(":(");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                String deleteQuery = "DELETE  FROM sprava WHERE id_sprava = ?";
+                PreparedStatement preparedStatementToDelete = connection.prepareStatement(deleteQuery);
+                preparedStatementToDelete.setInt(1, Integer.parseInt(selectedId));
+                preparedStatementToDelete.executeUpdate();
+            }
+            messagesTable.getItems().remove(selectedItem);
+            messagesTable.refresh();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }

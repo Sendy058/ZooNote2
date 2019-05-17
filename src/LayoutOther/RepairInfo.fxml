@@ -5,8 +5,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RepairInfoController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" styleClass="backGr" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RepairInfoController">
 
     <children>
         <Label fx:id="menoLabel" alignment="CENTER" layoutX="12.0" layoutY="25.0" prefHeight="17.0" prefWidth="377.0" text="OPRAVA">
@@ -20,7 +19,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Line endX="-14.0" endY="65.0" layoutX="122.0" layoutY="81.0" startX="-14.0" startY="-2.0" />
+        <Line endX="-14.0" endY="65.0" layoutX="123.0" layoutY="81.0" startX="-14.0" startY="-2.0" />
         <Label fx:id="predmetLabel" layoutX="145.0" layoutY="93.0" prefHeight="17.0" prefWidth="161.0">
             <font>
                 <Font size="14.0" />

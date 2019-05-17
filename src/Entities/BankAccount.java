@@ -39,7 +39,6 @@ public class BankAccount {
         setOfData.next();
 
         stav=setOfData.getDouble(1);
-        System.out.println();
         connection.close();
 
         return stav;
@@ -49,6 +48,7 @@ public class BankAccount {
         Connection connection = ConnectionClass.getConnection();
         String sql = "Update bankovy_ucet  set stav=?  WHERE id IS 1";
         PreparedStatement preparedStatementInsert = connection.prepareStatement(sql);
+
         preparedStatementInsert.setDouble(1,stav);
         preparedStatementInsert.executeUpdate();
         connection.close();
@@ -62,7 +62,6 @@ public class BankAccount {
         }
         System.out.println("pred " + stav);
         stav=stav+x;
-        System.out.println("po " + stav);
         try {
             update();
         } catch (SQLException e) {

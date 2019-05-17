@@ -14,6 +14,6 @@ class messagesControllerTest {
     @Test
     void zisti() throws SQLException {
         controller = new messagesController();
-        assertEquals("Admin", controller.zisti(0));
+        assertEquals("Admin", controller.zisti(1));
     }
 }

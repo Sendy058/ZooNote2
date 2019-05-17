@@ -17,8 +17,8 @@
       <TableColumn fx:id="dateColumn" prefWidth="177.0" resizable="false" text="DATUM NARODENIA" />
       <TableColumn fx:id="stavColumn" minWidth="0.0" prefWidth="97.0" resizable="false" text="STAV" />
       <TableColumn fx:id="triedaColumn" prefWidth="113.0" resizable="false" text="TRIEDA" />
-      <TableColumn fx:id="celadColumn" minWidth="0.0" prefWidth="101.0" resizable="false" text="ČEĽAĎ" />
-            <TableColumn fx:id="radColumn" minWidth="0.0" prefWidth="107.0" resizable="false" text="RAD" />
+      <TableColumn fx:id="celadColumn" minWidth="0.0" prefWidth="108.79998779296875" resizable="false" text="ČEĽAĎ" />
+            <TableColumn fx:id="radColumn" minWidth="0.0" prefWidth="100.0" resizable="false" text="RAD" />
    </columns>
 </TableView>
 <ImageView fx:id="addBtn" fitHeight="55.0" fitWidth="55.0" layoutX="693.0" layoutY="8.0" onMouseClicked="#showAddAnimal" pickOnBounds="true" preserveRatio="true" styleClass=".g">
