@@ -8,11 +8,6 @@
 
 <fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
    <children>
-      <ImageView disable="true" fitHeight="51.0" fitWidth="60.0" layoutX="707.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0;">
-         <image>
-            <Image url="@../image/updateBtnImg.png" />
-         </image>
-      </ImageView>
       <TableView fx:id="messagesTable" layoutX="78.0" layoutY="124.0" onMouseClicked="#showFromTable" prefHeight="366.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
          <columns>
             <TableColumn fx:id="nazovColumn" prefWidth="167.20001220703125" resizable="false" text="PREDMET" />
