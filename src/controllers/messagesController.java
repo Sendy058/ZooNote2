@@ -2,6 +2,8 @@ package controllers;
 
 import Entities.Messages;
 import connectivity.ConnectionClass;
+
+import content.contentController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +28,7 @@ import java.util.ResourceBundle;
 public class messagesController extends loginController implements Initializable {
     private ResultSet data, resultSetSize;
     ObservableList<Messages> mssData = FXCollections.observableArrayList();
-    ObservableList<Messages> mssDataUser = FXCollections.observableArrayList();
+
     // private String lastSelectedId = "", selectedId = "";
     //  public static Animal selectedItem;
 
@@ -51,7 +53,7 @@ public class messagesController extends loginController implements Initializable
     private int typKonta;
     private String lastSelectedId = "", selectedId = "";
     public static Messages selectedItem;
-
+    private contentController c;
 
     public void dataInport() {
         Connection connection = ConnectionClass.getConnection();
@@ -84,7 +86,7 @@ public class messagesController extends loginController implements Initializable
     private void userLoad() {
         Connection connection = ConnectionClass.getConnection();
         String sqlUser = "SELECT * FROM pouzivatel";
-        String countQuery = "SELECT Count(*) FROM sprava";
+        String countQuery = "SELECT Count(*) FROM pouzivatel";
 
         PreparedStatement preparedQuery;
         try {
@@ -276,10 +278,15 @@ public class messagesController extends loginController implements Initializable
         }
     }
 
-    /*public void refreshTable() {
-        insertIntoTableAdmin();
-        messagesTable.refresh();
-    }*/
+public void upDate(){
+        mssData.clear();
+        data=null;
+        resultSetSize=null;
+        dataInport();
 
+
+
+
+}
 
 }

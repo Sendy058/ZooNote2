@@ -88,7 +88,9 @@ public class usersController implements Initializable {
             data.next();
             for (int i = 0; i < Integer.parseInt(resultSetSize.getString(1)); i++) {
                 if (!data.isClosed()) {
-                    userList.add(new User(data.getString(5), data.getString(6), data.getString(2), data.getString(7), data.getString(4)));
+                    if (!data.getString(2).equals("admin")) {
+                        userList.add(new User(data.getString(5), data.getString(6), data.getString(2), data.getString(7), data.getString(4)));
+                    }
                     data.next();
                 }
             }

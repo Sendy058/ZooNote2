@@ -8,7 +8,8 @@
 
 <fx:root prefHeight="562.0" prefWidth="800.0" style="-fx-background-image: url(&quot;image/background.png&quot;); -fx-background-size: cover;" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.messagesController">
    <children>
-      <TableView fx:id="messagesTable" layoutX="78.0" layoutY="124.0" onMouseClicked="#showFromTable" prefHeight="366.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
+
+      <TableView fx:id="messagesTable" layoutX="69.0" layoutY="99.0" onMouseClicked="#showFromTable" prefHeight="392.0" prefWidth="681.0" style="-fx-background-color: transparent;" styleClass="table" stylesheets="@../style.css">
          <columns>
             <TableColumn fx:id="nazovColumn" prefWidth="167.20001220703125" resizable="false" text="PREDMET" />
             <TableColumn fx:id="typColumn" prefWidth="169.5999755859375" resizable="false" text="TYP" />
@@ -29,6 +30,11 @@
       <ImageView fx:id="infoBtn" fitHeight="51.0" fitWidth="51.0" layoutX="574.0" layoutY="44.0" onMouseClicked="#showMessagesInfo" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
          <image>
             <Image url="@../image/zdravotnaKartaIMG.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="60.0" layoutX="707.0" layoutY="504.0" onMouseClicked="#upDate" pickOnBounds="true" preserveRatio="true" styleClass="imageBtnAdm">
+         <image>
+            <Image url="@../image/updateBtnImg.png" />
          </image>
       </ImageView>
    </children>
