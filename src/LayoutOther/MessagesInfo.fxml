@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="410.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MessagesInfoController">
    <children>
-      <AnchorPane layoutX="14.0" prefHeight="600.0" prefWidth="400.0" stylesheets="@../style.css">
+      <AnchorPane layoutX="7.0" prefHeight="600.0" prefWidth="400.0" stylesheets="@../style.css">
          <children>
             <Label fx:id="menoLabel" alignment="CENTER" layoutX="12.0" layoutY="25.0" prefHeight="17.0" prefWidth="377.0" text="SPRÁVY">
                <font>
@@ -73,7 +73,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="177.0" layoutY="542.0" onMouseClicked="#konec" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="177.0" layoutY="542.0" onMouseClicked="#konec" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
                <image>
                   <Image url="@../image/checkMark.png" />
                </image>

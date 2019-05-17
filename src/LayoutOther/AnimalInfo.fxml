@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" styleClass="backGr" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AnimalInfoController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AnimalInfoController">
    <children>
       <Label fx:id="menoLabel" alignment="CENTER" layoutX="12.0" layoutY="25.0" prefHeight="17.0" prefWidth="377.0" text="RIKY">
          <font>
@@ -90,7 +90,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="53.0" fitWidth="73.0" layoutX="172.0" layoutY="535.0" onMouseClicked="#updateAnimal" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="53.0" fitWidth="73.0" layoutX="172.0" layoutY="535.0" onMouseClicked="#updateAnimal" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
          <image>
             <Image url="@../image/checkMark.png" />
          </image>

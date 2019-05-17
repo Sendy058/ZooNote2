@@ -1,5 +1,6 @@
 package controllers;
 
+import Entities.Messages;
 import connectivity.ConnectionClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,8 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import sample.Animal;
-import sample.Messages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -131,8 +130,7 @@ public class messagesController extends loginController implements Initializable
                 for (int i = 0; i < p; i++) {
 
                     zisti(data.getInt(7));
-                    System.out.println(data.getInt(6) + "," + primatel);
-                    System.out.println(odosielatelString + "," + currentlyLoggedUser.getType());
+
                     if (data.getInt(6) == primatel || odosielatelString.equals(currentlyLoggedUser.getType())) {
 
                         switch (data.getInt(2)) {

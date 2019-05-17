@@ -69,7 +69,7 @@
 
 .choice-box .context-menu { -fx-width:300px; }
 
-.choice-box .menu-item:focused { -fx-background-color: #80906c; }
+.menu-item:focused { -fx-background-color: #80906c; }
 .choice-box > .label { -fx-font-weight: bold;
                        -fx-font-size: 1.3em; }
 
@@ -183,4 +183,15 @@
 
 .imageBtn:hover{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.imageBtnAdm:hover{
+    -fx-padding: 6 12 6 25;
+}
+
+.xxx{
+-fx-height: 20px;
+-fx-font-weight: regular;
+                       -fx-font-size: 1.0em;
+
 }

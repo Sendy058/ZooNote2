@@ -163,9 +163,6 @@ public class FinancesController  implements Initializable {
                 if (1 == Integer.parseInt(opravy.getString(4))) {
                     pieChartDataOpravy.add(new PieChart.Data(opravy.getString(2), opravy.getDouble(5)));
                     opravKomplet=opravKomplet+opravy.getDouble(5);
-
-
-
                 }
 
                 opravy.next();
@@ -229,7 +226,7 @@ public class FinancesController  implements Initializable {
 
 
         int dlzka = resultSetSizeZvie.getInt(1);
-        System.out.println(dlzka);
+
         int dlzkaU=resultUser.getInt(1);
         zvierata.next();
         int p=0;

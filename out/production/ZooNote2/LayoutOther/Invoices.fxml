@@ -21,17 +21,17 @@
             <TableColumn fx:id="datumColumn" prefWidth="167.199951171875" resizable="false" text="DATUM" />
          </columns>
       </TableView>
-      <ImageView fx:id="plusMssBtn" fitHeight="60.0" fitWidth="64.0" layoutX="699.0" layoutY="39.0" onMouseClicked="#plusMss" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="plusMssBtn" fitHeight="60.0" fitWidth="64.0" layoutX="699.0" layoutY="39.0" onMouseClicked="#plusMss" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
          <image>
             <Image url="@../image/plus.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="deletBtn" fitHeight="60.0" fitWidth="51.0" layoutX="640.0" layoutY="44.0" onMouseClicked="#deleteMessages" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="deletBtn" fitHeight="60.0" fitWidth="51.0" layoutX="640.0" layoutY="44.0" onMouseClicked="#deleteMessages" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
          <image>
             <Image url="@../image/minus.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="infoBtn" fitHeight="51.0" fitWidth="51.0" layoutX="574.0" layoutY="44.0" onMouseClicked="#showMessagesInfo" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="infoBtn" fitHeight="51.0" fitWidth="51.0" layoutX="574.0" layoutY="44.0" onMouseClicked="#showMessagesInfo" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
          <image>
             <Image url="@../image/zdravotnaKartaIMG.png" />
          </image>

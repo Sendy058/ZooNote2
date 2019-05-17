@@ -14,8 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sample.Repair;
-import sample.User;
+import Entities.Repair;
+import Entities.Repair;
+import Entities.User;
 
 import java.io.IOException;
 import java.net.URL;

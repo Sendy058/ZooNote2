@@ -1,4 +1,4 @@
-package sample;
+package Entities;
 
 import connectivity.ConnectionClass;
 
@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BankAccount {
+
     private int id;
     private double stav;
 
@@ -29,7 +30,8 @@ public class BankAccount {
         this.stav = stav;
     }
 
-    public void nacitaj()throws SQLException{
+    public double nacitaj()throws SQLException{
+        System.out.println(stav + "hihi");
         Connection connection = ConnectionClass.getConnection();
         String sql = "SELECT stav FROM bankovy_ucet WHERE id IS 1";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -37,8 +39,9 @@ public class BankAccount {
         setOfData.next();
 
         stav=setOfData.getDouble(1);
-
         connection.close();
+
+        return stav;
 
     }
     public void update()throws SQLException{
@@ -57,8 +60,8 @@ public class BankAccount {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("pred " + stav);
         stav=stav+x;
-
         try {
             update();
         } catch (SQLException e) {

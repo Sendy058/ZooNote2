@@ -1,5 +1,6 @@
 package controllers;
 
+import Entities.User;
 import connectivity.ConnectionClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.User;
-
 import javax.jnlp.UnavailableServiceException;
 import java.io.IOException;
 import java.net.URL;

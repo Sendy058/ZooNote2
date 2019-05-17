@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ResetPass">
+<fx:root prefHeight="529.0" prefWidth="798.0" styleClass="back" stylesheets="@../style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Email.ResetPass">
     <children>
         <TextField fx:id="kodRess" layoutX="269.0" layoutY="127.0" onAction="#over" prefHeight="45.0" prefWidth="250.0" styleClass="text">
             <font>
@@ -18,13 +18,13 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-        <ImageView fx:id="back" fitHeight="35.0" fitWidth="44.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#spat" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="back" fitHeight="35.0" fitWidth="44.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#spat" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
             <image>
                 <Image url="@../image/nazat.png" />
             </image>
         </ImageView>
         <Label fx:id="ErrorResPass" layoutX="246.0" layoutY="302.0" prefHeight="21.0" prefWidth="306.0" textFill="RED" />
-        <ImageView fitHeight="52.0" fitWidth="62.0" layoutX="363.0" layoutY="204.0" onMouseClicked="#over" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="52.0" fitWidth="62.0" layoutX="363.0" layoutY="204.0" onMouseClicked="#over" pickOnBounds="true" preserveRatio="true" styleClass="imageBtn">
             <image>
                 <Image url="@../image/dalej.png" />
             </image>

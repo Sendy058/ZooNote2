@@ -14,6 +14,10 @@ import java.sql.Connection;
 
 public class Main extends Application {
 
+    /**
+     * Main class opens login layout, set application icon and connects application to database.
+     */
+
     private static Connection connection;
 
     @Override
@@ -28,16 +32,12 @@ public class Main extends Application {
         primaryStage.setResizable(false);
     }
 
-
     public static void main(String[] args) {
-
         connection = ConnectionClass.getConnection();
         if(connection == null) {
             System.exit(1);
         }
         launch(args);
-
-
     }
 
 
