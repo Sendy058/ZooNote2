@@ -63,7 +63,6 @@ public class ResetPass implements Initializable {
 
        String sqlEmail = "SELECT email FROM pouzivatel WHERE username = ?" ;
 
-
        Connection connection = ConnectionClass.getConnection();
 
        PreparedStatement statementForEmail = connection.prepareStatement(sqlEmail);
@@ -74,6 +73,7 @@ public class ResetPass implements Initializable {
        if (!Email.isClosed() || !Email.isClosed()) {
 
            mail =Email.getString(1);
+           System.out.println(mail);
            connection.close();
            kod();
             if (send(mail,kodS)==true) {
@@ -169,6 +169,7 @@ public class ResetPass implements Initializable {
 
     @FXML
      public void over(){
+        System.out.println(kodRess.getText()+" kod");
        if (kodRess.getText().equals(kodS)){
            try {
                Stage stage = (Stage) back.getScene().getWindow();

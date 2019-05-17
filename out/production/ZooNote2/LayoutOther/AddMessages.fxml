@@ -10,9 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddMessages">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddMessages">
    <children>
       <AnchorPane layoutX="6.0" layoutY="4.0" prefHeight="600.0" prefWidth="400.0">
          <children>
@@ -59,7 +57,7 @@
             </Label>
             <ChoiceBox fx:id="prijemcaBox" layoutX="214.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="150.0" />
             <ChoiceBox fx:id="typBox" layoutX="214.0" layoutY="159.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="150.0" styleClass="xxx" />
-            <Label fx:id="label" layoutX="19.0" layoutY="541.0" prefHeight="49.0" prefWidth="138.0" text="Vsetky polia su povinne" visible="false" />
+            <Label fx:id="label" layoutX="19.0" layoutY="530.0" prefHeight="60.0" prefWidth="150.0" text="Vsetky polia su povinne" visible="false" />
          </children>
       </AnchorPane>
    </children>

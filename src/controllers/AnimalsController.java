@@ -193,11 +193,32 @@ public class AnimalsController extends loginController implements Initializable 
         stage.show();
     }
 
-    public void refreshTable() {
-        searchField.clear();
-        insertIntoTable("");
-        animalsTable.refresh();
+    public void refreshTable() throws SQLException {
+        animalList.clear();
+        Connection connection = ConnectionClass.getConnection();
+        String sqlQuery = "SELECT * FROM zviera";
+        String countQuery = "SELECT Count(*) FROM zviera";
+
+        PreparedStatement preparedQuery, preparedCountStatement;
+        try {
+            preparedCountStatement = connection.prepareStatement(countQuery);
+            resultSetSize = preparedCountStatement.executeQuery();
+            size = resultSetSize.getInt(1);
+            preparedQuery = connection.prepareStatement(sqlQuery);
+            data = preparedQuery.executeQuery();
+            data.next();
+            for (int i = 0; i < size; i++) {
+                animalList.add(new Animal(data.getString(2), data.getString(3), data.getString(4), data.getString(5), data.getString(6), data.getString(7), data.getString(8), data.getString(9)));
+                data.next();
+            }
+            searchField.clear();
+            data = null;
+            connection.close();
+            insertIntoTable("");
+            animalsTable.refresh();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }connection.close();
+
     }
-
-
-}
+    }
